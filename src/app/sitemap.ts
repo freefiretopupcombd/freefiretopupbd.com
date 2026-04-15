@@ -14,7 +14,7 @@ async function fetchProducts() {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.gammingbazaar.com'
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.freefiretopupbd.com'
   
   const products = await fetchProducts();
   const productUrls: MetadataRoute.Sitemap = products.map((product: any) => ({
