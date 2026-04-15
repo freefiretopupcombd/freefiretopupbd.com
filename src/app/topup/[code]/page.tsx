@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation';
 
 async function fetchProductDetails(code: string) {
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://backend.gammingbazaar.com';
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://backend.freefiretopupbd.com';
     const res = await fetch(`${apiUrl}/api/topup-detail/${code}`, {
       next: { revalidate: 60 },
       headers: {
@@ -49,7 +49,7 @@ export async function generateMetadata({ params }: { params: Promise<{ code: str
       title,
       description,
       images: ogImageUrl ? [{ url: ogImageUrl }] : [],
-      url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.gammingbazaar.com'}/topup/${code}`,
+      url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.freefiretopupbd.com'}/topup/${code}`,
       type: 'website',
     },
     twitter: {

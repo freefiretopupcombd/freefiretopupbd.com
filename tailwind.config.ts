@@ -13,7 +13,7 @@ const config: Config = {
         foreground: "#E2E8F0", // Slate 200 light gray text
         card: "#131823",      // Slightly lighter dark for cards
         primary: {
-          DEFAULT: "#FF3366", // Vibrant Neon Pink/Red for accents (matches Gamming Bazaar)
+          DEFAULT: "#FF3366", // Vibrant Neon Pink/Red for accents (matches Free Fire Top Up BD)
           hover: "#E62E5C",
         },
         secondary: {

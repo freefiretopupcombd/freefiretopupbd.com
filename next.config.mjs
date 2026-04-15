@@ -10,11 +10,11 @@ const nextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: 'https://backend.gammingbazaar.com/api/:path*',
+        destination: 'https://backend.freefiretopupbd.com/api/:path*',
       },
       {
         source: '/storage/:path*',
-        destination: 'https://backend.gammingbazaar.com/storage/:path*',
+        destination: 'https://backend.freefiretopupbd.com/storage/:path*',
       },
     ];
   },
@@ -32,10 +32,10 @@ const nextConfig = {
         has: [
           {
             type: 'host',
-            value: 'www.gammingbazaar.com',
+            value: 'www.freefiretopupbd.com',
           },
         ],
-        destination: 'https://gammingbazaar.com/:path*',
+        destination: 'https://freefiretopupbd.com/:path*',
         permanent: true,
       },
     ];

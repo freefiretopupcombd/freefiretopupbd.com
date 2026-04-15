@@ -17,25 +17,25 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://www.gammingbazaar.com'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://www.freefiretopupbd.com'),
   title: {
-    template: '%s | Gamming Bazaar',
-    default: 'Gamming Bazaar - Premium Game Top Up & Gift Cards',
+    template: '%s | Free Fire Top Up BD',
+    default: 'Free Fire Top Up BD - Premium Game Top Up & Gift Cards',
   },
   manifest: '/manifest.json',
   description: 'Premium game top-up app in Bangladesh, offering seamless and automatic Bkash, Nagad payments for Free Fire, PUBG, and more.',
   keywords: ['topup bangladesh', 'game top up', 'free fire topup bd', 'pubg uc buy bangladesh', 'diamond topup bKash', 'instant game topup'],
-  authors: [{ name: 'Gamming Bazaar' }],
+  authors: [{ name: 'Free Fire Top Up BD' }],
   icons: {
     icon: '/favicon.ico',
     shortcut: '/favicon.ico',
     apple: '/favicon.ico',
   },
   openGraph: {
-    title: 'Gamming Bazaar - Premium Game Top Up',
+    title: 'Free Fire Top Up BD - Premium Game Top Up',
     description: 'Get your game credits instantly! Premium games top up app in Bangladesh with automated delivery.',
     url: '/',
-    siteName: 'Gamming Bazaar',
+    siteName: 'Free Fire Top Up BD',
     locale: 'en_US',
     type: 'website',
   },
