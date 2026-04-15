@@ -2,6 +2,12 @@ import React from 'react';
 import ProductGrid from '@/components/home/ProductGrid';
 import Link from 'next/link';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'Top Up Games & Gift Cards',
+    description: 'Buy mobile game top-ups and gift cards instantly at Free Fire Top Up BD.',
+};
 
 async function fetchProducts(page: number) {
     try {

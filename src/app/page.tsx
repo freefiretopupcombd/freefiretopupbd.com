@@ -1,10 +1,24 @@
 import React from 'react';
+import type { Metadata } from 'next';
 import HomeCarousel from '@/components/home/HomeCarousel';
 import HomePageModal from '@/components/home/HomePageModal';
 import ProductGrid from '@/components/home/ProductGrid';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import Link from 'next/link';
 import NoticeBanner from '@/components/home/NoticeBanner';
+
+export const metadata: Metadata = {
+  title: 'Free Fire Top Up BD - Instant Diamond Top Up Bangladesh',
+  description: 'Buy Free Fire diamonds instantly in Bangladesh with secure and fast delivery.',
+  keywords: ['free fire diamond top up', 'diamond bd', 'ff top up bangladesh'],
+  openGraph: {
+    title: 'Free Fire Top Up BD',
+    description: 'Instant Free Fire diamond top up in Bangladesh',
+    url: 'https://freefiretopupbd.com',
+    siteName: 'Free Fire Top Up BD',
+    type: 'website',
+  },
+};
 
 async function fetchSiteSettings() {
     try {
@@ -77,7 +91,7 @@ export default async function HomePage({ searchParams }: { searchParams: { page?
                 <div className="text-center mb-6 mt-10">
                     <div className="flex items-center justify-center px-4 py-4 md:py-8">
                         <hr className="flex-grow border-gray-300" />
-                        <h3 className="text-2xl sm:text-3xl font-bold mx-4 text-gray-900 font-primary">MOBILE GAMES TOP UP</h3>
+                        <h1 className="text-2xl sm:text-3xl font-bold mx-4 text-gray-900 font-primary">Free Fire Top Up BD</h1>
                         <hr className="flex-grow border-gray-300" />
                     </div>
                 </div>

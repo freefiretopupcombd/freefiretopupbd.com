@@ -19,7 +19,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://www.freefiretopupbd.com'),
   title: {
-    template: '%s | Free Fire Top Up BD',
+    template: '%s',
     default: 'Free Fire Top Up BD - Premium Game Top Up & Gift Cards',
   },
   manifest: '/manifest.json',

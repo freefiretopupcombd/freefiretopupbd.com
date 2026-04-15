@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: { params: Promise<{ code: str
     };
   }
 
-  const title = `${product.name} Top Up Bangladesh`;
+  const title = `${product.name}`;
   const description = `Buy ${product.name} instantly through Bkash and Nagad. Fast and reliable top up service in Bangladesh for ${product.name}.`;
 
   let ogImageUrl = '';
