@@ -53,7 +53,7 @@ export default function Header() {
                 <div className="container mx-auto p-2 py-3 md:py-5 md:px-0">
                     <nav className="flex items-center justify-between">
                         <Link href="/">
-                            <img src="/src_assets/img/1711652676.png" alt="Logo" className="w-28 md:w-48 object-contain h-12" />
+                            <img src="/src_assets/img/freefiretopupbd.png" alt="Logo" className="w-28 md:w-48 object-contain h-12" />
                         </Link>
                         
                         <form onSubmit={search} className={`search-form flex-grow mx-4 relative ${isSearchActive ? 'block' : 'hidden md:block'}`}>
