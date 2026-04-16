@@ -1,17 +1,29 @@
 import { MetadataRoute } from 'next'
 
-// Fetch all products dynamically for the sitemap
+
+export const dynamic = 'force-dynamic';
+
 async function fetchProducts() {
-  try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/all-products`, { next: { revalidate: 60 } });
-    if (!res.ok) return [];
-    
-    const data = await res.json();
-    return data;
-  } catch {
-    return [];
-  }
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/all-products`, {
+    cache: 'no-store'
+  });
+
+  if (!res.ok) return [];
+  return res.json();
 }
+
+// // Fetch all products dynamically for the sitemap
+// async function fetchProducts() {
+//   try {
+//     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/all-products`, { next: { revalidate: 60 } });
+//     if (!res.ok) return [];
+    
+//     const data = await res.json();
+//     return data;
+//   } catch {
+//     return [];
+//   }
+// }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.freefiretopupbd.com'
