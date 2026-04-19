@@ -70,6 +70,7 @@ export default function Header() {
                         <div className="flex items-center gap-4">
                             <div className="hidden md:flex gap-4">
                                 <Link href="/topup" className="font-bold p-2 hover:text-red-500 transition-colors">Topup</Link>
+                                <Link href="/faq" className="font-bold p-2 hover:text-red-500 transition-colors">FAQ</Link>
                                 <Link href="/contact" className="font-bold p-2 hover:text-red-500 transition-colors">Contact US</Link>
                             </div>
                             

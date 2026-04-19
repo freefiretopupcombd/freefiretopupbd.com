@@ -60,6 +60,7 @@ export default function Sidebar({ onClose }: { onClose: () => void }) {
                     <Link href="/profile/transactions" onClick={onClose} className="text-gray-900 no-underline block p-4 hover:bg-gray-100"> My Transaction </Link>
                     <Link href="/profile/add-money" onClick={onClose} className="text-gray-900 no-underline block p-4 hover:bg-gray-100"> Add Money </Link>
                     <Link href="/contact" onClick={onClose} className="text-gray-900 no-underline block p-4 hover:bg-gray-100"> Contact Us </Link>
+                    <Link href="/faq" onClick={onClose} className="text-gray-900 no-underline block p-4 hover:bg-gray-100">FAQ</Link>
                     <hr />
                     <div className="w-full mx-auto text-center mt-3">
                         <a href="https://wa.me/+8801317956376" target="_blank" rel="noopener noreferrer" className="align-middle bg-pink-500 hover:bg-pink-400 text-white text-sm font-semibold rounded-lg inline-block shadow-lg px-6 py-2 mb-2">

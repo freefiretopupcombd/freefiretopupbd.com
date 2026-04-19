@@ -18,59 +18,63 @@ export default function Footer() {
     return (
         <>
             <footer className="mt-auto mb-16 md:mb-0 text-gray-200 border-t-2 bg-gray-900 border-gray-800">
-                <section className="container mx-auto pb-8 pt-10">
-                    <div className="flex flex-wrap">
-                        {/* Stay Connected */}
-                        <div className="w-full md:w-1/3 px-5 md:px-0">
-                            <h3 className="text-lg font-bold uppercase text-white tracking-wider mb-4">Stay Connected</h3>
-                            <div className="text-sm text-gray-400 mb-4 cursor-pointer">
-                                <a href={`https://wa.me/${contact_info.whatsapp_number}`} className="block mb-2">
-                                    কোন সমস্যায় পড়লে হোয়াটসঅ্যাপ এ যোগাযোগ করবেন। তাহলে দ্রুত সমাধান পেয়ে যাবেন। WA.ME/{contact_info.whatsapp_number}
-                                </a>
-                            </div>
-                            <div className="flex gap-4 text-white">
-                                <a href={contact_info.facebook} target="_blank" rel="noopener noreferrer" className="p-2 bg-gray-800 rounded-full hover:bg-red-500 transition-colors">
-                                    <FaFacebook size={20} />
-                                </a>
-                                <a href={contact_info.instagram} target="_blank" rel="noopener noreferrer" className="p-2 bg-gray-800 rounded-full hover:bg-red-500 transition-colors">
-                                    <FaInstagram size={20} />
-                                </a>
-                                <a href={contact_info.youtube} target="_blank" rel="noopener noreferrer" className="p-2 bg-gray-800 rounded-full hover:bg-red-500 transition-colors">
-                                    <FaYoutube size={20} />
-                                </a>
-                                <a href={`mailto:${contact_info.email}`} target="_blank" rel="noopener noreferrer" className="p-2 bg-gray-800 rounded-full hover:bg-red-500 transition-colors">
-                                    <FaEnvelope size={20} />
-                                </a>
-                            </div>
-                        </div>
+                <section className="container mx-auto px-5 py-10">
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
 
-                        {/* App Download Placeholder (Removed old complex SVG) */}
-                        <div className="w-full md:w-1/3 px-5 md:px-0 mt-8 md:mt-0 text-center">
-                            <h3 className="text-lg font-bold uppercase text-white tracking-wider mb-4">Our Mobile App</h3>
-                            <a href={contact_info.google_app_url} target="_blank" rel="noopener noreferrer" className="inline-block hover:opacity-80 transition-opacity">
-                                <div className="bg-black text-white px-6 py-3 rounded-xl flex items-center justify-center gap-3 border border-gray-700">
-                                    {/* <span className="font-bold">GET IT ON<br/>Google Play</span> */}
-                                    <img className='w-40' src="https://bakgroma.shop/assets/images/stores/DEU/google-play.png" alt="" />
-                                </div>
-                            </a>
-                        </div>
+    {/* 1. Stay Connected */}
+    <div>
+      <h3 className="text-lg font-bold text-white mb-4">Stay Connected</h3>
 
-                        {/* Support Center */}
-                        <div className="w-full md:w-1/3 px-5 md:px-0 mt-8 md:mt-0 md:text-right">
-                            <h3 className="text-lg font-bold uppercase text-white tracking-wider mb-4">Support Center</h3>
-                            <a href={`https://wa.me/${contact_info.whatsapp_number}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-4 bg-gray-800 p-4 rounded-xl hover:bg-gray-700 transition">
-                                <FaWhatsapp size={32} className="text-green-500" />
-                                <div className="text-left border-l-2 border-gray-600 pl-4">
-                                    <p className="text-xs text-gray-400">Help line [9AM-12PM]</p>
-                                    <span className="font-bold font-mono text-lg">{contact_info.phone_number}</span>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </section>
+      <p className="text-gray-400 text-sm mb-4">
+        কোনো সমস্যায় পড়লে হোয়াটসঅ্যাপ এ যোগাযোগ করুন।
+      </p>
+
+      <div className="flex gap-4">
+        <a href={contact_info.facebook} target="_blank" className="p-2 bg-gray-800 rounded-full hover:bg-red-500 transition">
+          <FaFacebook />
+        </a>
+        <a href={contact_info.instagram} target="_blank" className="p-2 bg-gray-800 rounded-full hover:bg-red-500 transition">
+          <FaInstagram />
+        </a>
+        <a href={contact_info.youtube} target="_blank" className="p-2 bg-gray-800 rounded-full hover:bg-red-500 transition">
+          <FaYoutube />
+        </a>
+      </div>
+    </div>
+
+    {/* 2. Quick Links */}
+    <div>
+      <h3 className="text-lg font-bold text-white mb-4">Quick Links</h3>
+
+      <div className="flex flex-col gap-2 text-gray-400 text-sm">
+        <Link href="/about" className="hover:text-red-500 transition">About Us</Link>
+        <Link href="/privacy-policy" className="hover:text-red-500 transition">Privacy Policy</Link>
+        <Link href="/refund-policy" className="hover:text-red-500 transition">Refund Policy</Link>
+        
+      </div>
+    </div>
+
+    {/* 3. Support */}
+    <div>
+      <h3 className="text-lg font-bold text-white mb-4">Support</h3>
+
+      <a href={`https://wa.me/${contact_info.whatsapp_number}`} target="_blank"
+         className="flex items-center gap-4 bg-gray-800 p-4 rounded-xl hover:bg-gray-700 transition">
+
+        <FaWhatsapp size={28} className="text-green-500" />
+
+        <div>
+          <p className="text-xs text-gray-400">Help line</p>
+          <p className="font-bold text-white">{contact_info.phone_number}</p>
+        </div>
+      </a>
+    </div>
+
+  </div>
+</section>
 
                 <div className="border-t border-gray-800 py-6 text-center text-sm text-gray-500">
-                    <p>© Copyright 2024. All Rights Reserved.</p>
+                    <p>© Copyright 2026. All Rights Reserved.</p>
                 </div>
 
                 {/* Floating Support Button */}
