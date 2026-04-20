@@ -31,7 +31,7 @@ export default function HomePageModal({ initialData }: { initialData: any }) {
 
     return (
         <div className="fixed inset-0 z-[9999999] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300">
-            <div className="relative bg-white rounded-xl shadow-2xl max-w-[600px] w-full mt-20 md:mt-0 animate-in zoom-in-95 duration-300 overflow-hidden flex flex-col md:flex-row">
+            <div className="relative bg-#0b1224 rounded-xl shadow-2xl max-w-[600px] w-full mt-20 md:mt-0 animate-in zoom-in-95 duration-300 overflow-hidden flex flex-col md:flex-row">
                 <button
                     className="absolute -right-0 -top-0 bg-red-500 hover:bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center shadow-lg transition-transform hover:scale-110 z-10"
                     onClick={closeHandler}

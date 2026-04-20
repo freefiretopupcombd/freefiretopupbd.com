@@ -25,97 +25,176 @@ export default function ManualPaymentForm({
     transactionId, setTransactionId, error, loading, onSubmit, onCancel
 }: ManualPaymentFormProps) {
     return (
-        <section className="mt-4 animate-in fade-in slide-in-from-bottom-2 duration-300">
-            <div className="bg-white border rounded-xl shadow-sm p-5 md:p-6">
-                <div className="flex justify-between items-center mb-6">
-                    <h2 className="text-xl font-bold text-gray-800">Manual Payment</h2>
-                    <button onClick={onCancel} className="text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-full w-8 h-8 flex items-center justify-center transition-colors font-bold">
-                        ✕
-                    </button>
-                </div>
+  <section className="mt-4">
+  <div className="bg-slate-900 border border-slate-800 rounded-2xl shadow-lg p-5 md:p-6">
 
-                <div className="mb-6 p-4 bg-gray-50 border border-gray-100 rounded-lg">
-                    <h3 className="font-bold text-gray-700 mb-3 border-b pb-2">Order Summary</h3>
-                    <div className="space-y-2 text-sm text-gray-600">
-                        <p><span className="font-medium text-gray-800">Product:</span> {product?.name}</p>
-                        <p><span className="font-medium text-gray-800">Package:</span> {selectedRechargeType}</p>
-                        <p><span className="font-medium text-gray-800">Quantity:</span> {quantity}</p>
-                        <p className="text-lg font-bold text-pink-600 mt-3 pt-2 border-t border-gray-200">Total: ৳ {totalAmount}</p>
-                    </div>
-                </div>
+    {/* HEADER */}
+    <div className="flex justify-between items-center mb-6">
+      <h2 className="text-lg font-semibold text-white">
+        Manual Payment
+      </h2>
 
-                <form onSubmit={onSubmit}>
-                    <div className="mb-6">
-                        <label className="block font-medium text-sm text-gray-700 mb-3">Select Payment Method</label>
-                        {paymentMethods.length === 0 ? (
-                            <div className="text-center py-3 text-gray-500 italic">Leading payment options...</div>
-                        ) : (
-                            <div className="flex gap-3 flex-wrap">
-                                {paymentMethods.map((method) => (
-                                    <button
-                                        key={method.id}
-                                        type="button"
-                                        onClick={() => setSelectedManualMethod(method)}
-                                        className={`px-6 py-2.5 rounded-lg font-medium transition-all duration-200 shadow-sm ${selectedManualMethod?.id === method.id ? 'bg-pink-600 text-white scale-105 shadow-pink-500/20' : 'bg-white border border-gray-300 text-gray-700 hover:border-pink-400 hover:bg-pink-50'}`}
-                                    >
-                                        {method.name}
-                                    </button>
-                                ))}
-                            </div>
-                        )}
-                    </div>
+      <button
+        onClick={onCancel}
+        className="text-slate-400 hover:text-red-400 hover:bg-red-500/10 rounded-full w-9 h-9 flex items-center justify-center transition"
+      >
+        ✕
+      </button>
+    </div>
 
-                    {selectedManualMethod && (
-                        <div className="mb-6 p-4 bg-orange-50 border border-orange-200 rounded-lg animate-in fade-in duration-300">
-                            <p className="text-sm font-medium text-gray-600 mb-1">Send money to:</p>
-                            <p className="text-2xl font-bold tracking-wider text-orange-600">{selectedManualMethod.phone}</p>
-                            <p className="text-sm font-medium text-gray-700 mt-2 bg-orange-100 inline-block px-3 py-1 rounded-full">Amount: ৳ {totalAmount}</p>
-                            <p className="text-[10px] text-pink-500/70 mt-1 font-bold">উপরে দেয়া নাম্বার এ আপনাকে প্রথমে টাকা সেন্টমানি করতে হবে..</p>
-                        </div>
-                    )}
+    {/* ORDER SUMMARY */}
+    <div className="mb-6 p-4 bg-slate-800 border border-slate-700 rounded-xl">
+      <h3 className="text-sm font-semibold text-slate-300 mb-3 border-b border-slate-700 pb-2">
+        Order Summary
+      </h3>
 
-                    <div className="space-y-4 mb-6">
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Your Number / Sender Number</label>
-                            <input
-                                type="text"
-                                value={senderNumber}
-                                onChange={(e) => setSenderNumber(e.target.value)}
-                                placeholder="01XXXXXXXXX"
-                                className="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-pink-500/50 focus:border-pink-500 transition-colors bg-gray-50 focus:bg-white"
-                                required
-                            />
-                        </div>
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Transaction ID</label>
-                            <input
-                                type="text"
-                                value={transactionId}
-                                onChange={(e) => setTransactionId(e.target.value)}
-                                placeholder="Enter TrxID"
-                                className="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-pink-500/50 focus:border-pink-500 transition-colors uppercase bg-gray-50 focus:bg-white"
-                                required
-                            />
-                        </div>
-                    </div>
+      <div className="space-y-2 text-sm text-slate-400">
+        <p><span className="text-white font-medium">Product:</span> {product?.name}</p>
+        <p><span className="text-white font-medium">Package:</span> {selectedRechargeType}</p>
+        <p><span className="text-white font-medium">Quantity:</span> {quantity}</p>
 
-                    {error && (
-                        <div className="mb-6 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm animate-in fade-in duration-300 flex items-start gap-2">
-                            <span className="font-bold text-lg leading-none">!</span>
-                            <span>{error}</span>
-                        </div>
-                    )}
+        <p className="text-lg font-semibold text-orange-400 mt-3 pt-2 border-t border-slate-700">
+          Total: ৳ {totalAmount}
+        </p>
+      </div>
+    </div>
 
-                    <div className="flex gap-4">
-                        <button type="button" onClick={onCancel} className="flex-1 px-4 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 font-medium transition-colors">
-                            Cancel
-                        </button>
-                        <button type="submit" disabled={loading} className="flex-1 px-4 py-3 bg-gradient-to-r from-pink-500 to-red-500 text-white rounded-lg hover:from-pink-600 hover:to-red-600 disabled:opacity-50 font-medium shadow-md shadow-pink-500/20 transition-all">
-                            {loading ? "Submitting..." : "Submit Payment"}
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </section>
+    <form onSubmit={onSubmit}>
+
+      {/* PAYMENT METHOD */}
+      <div className="mb-6">
+        <label className="block text-sm font-medium text-slate-300 mb-3">
+          Select Payment Method
+        </label>
+
+        {paymentMethods.length === 0 ? (
+          <div className="text-center py-3 text-slate-500 italic">
+            Loading payment options...
+          </div>
+        ) : (
+          <div className="flex gap-3 flex-wrap">
+            {paymentMethods.map((method) => {
+              const isSelected =
+                selectedManualMethod &&
+                selectedManualMethod.id === method.id;
+
+              return (
+                <button
+                  key={method.id}
+                  type="button"
+                  onClick={() => setSelectedManualMethod(method)}
+                  className={`px-5 py-2.5 rounded-xl text-sm font-medium transition-all duration-200
+
+                  ${isSelected
+                    ? "bg-gradient-to-r from-pink-500 to-orange-500 text-white shadow-md scale-[1.03]"
+                    : "bg-slate-800 border border-slate-700 text-slate-300 hover:border-orange-400"
+                  }
+                  `}
+                >
+                  {method.name}
+                </button>
+              );
+            })}
+          </div>
+        )}
+      </div>
+
+      {/* PAYMENT INFO */}
+      {selectedManualMethod && (
+        <div className="mb-6 p-4 bg-orange-500/10 border border-orange-500/30 rounded-xl">
+          <p className="text-sm text-slate-300 mb-1">
+            Send money to
+          </p>
+
+          <p className="text-xl font-bold tracking-wide text-orange-400">
+            {selectedManualMethod.phone}
+          </p>
+
+          <p className="text-sm text-slate-300 mt-2">
+            Amount: <span className="font-semibold text-orange-400">৳ {totalAmount}</span>
+          </p>
+
+          <p className="text-xs text-pink-400 mt-2">
+            প্রথমে উপরের নাম্বারে টাকা পাঠান, তারপর নিচে তথ্য দিন।
+          </p>
+        </div>
+      )}
+
+      {/* INPUTS */}
+      <div className="space-y-4 mb-6">
+
+        <div>
+          <label className="block text-sm font-medium text-slate-300 mb-1">
+            Your Number / Sender Number
+          </label>
+
+          <input
+            type="text"
+            value={senderNumber || ""}
+            onChange={(e) => setSenderNumber(e.target.value)}
+            placeholder="01XXXXXXXXX"
+            required
+            className="w-full border border-slate-700 rounded-xl px-4 py-2.5 
+            bg-slate-800 text-white placeholder-slate-400
+            focus:outline-none focus:ring-2 focus:ring-orange-500/40 focus:border-orange-500 
+            transition"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-slate-300 mb-1">
+            Transaction ID
+          </label>
+
+          <input
+            type="text"
+            value={transactionId || ""}
+            onChange={(e) => setTransactionId(e.target.value)}
+            placeholder="Enter TrxID"
+            required
+            className="w-full border border-slate-700 rounded-xl px-4 py-2.5 
+            bg-slate-800 text-white placeholder-slate-400 uppercase
+            focus:outline-none focus:ring-2 focus:ring-orange-500/40 focus:border-orange-500 
+            transition"
+          />
+        </div>
+
+      </div>
+
+      {/* ERROR */}
+      {error && (
+        <div className="mb-6 p-3 bg-red-500/10 border border-red-500/30 rounded-xl text-red-400 text-sm flex gap-2">
+          <span>⚠</span>
+          <span>{error}</span>
+        </div>
+      )}
+
+      {/* BUTTONS */}
+      <div className="flex gap-4">
+
+        <button
+          type="button"
+          onClick={onCancel}
+          className="flex-1 py-3 border border-slate-700 text-slate-300 rounded-xl hover:bg-slate-800 transition"
+        >
+          Cancel
+        </button>
+
+        <button
+          type="submit"
+          disabled={loading}
+          className="flex-1 py-3 bg-gradient-to-r from-pink-500 via-orange-500 to-red-500 
+          text-white rounded-xl shadow-lg shadow-orange-500/20 
+          hover:from-pink-600 hover:to-red-600 
+          transition disabled:opacity-60"
+        >
+          {loading ? "Submitting..." : "Submit Payment"}
+        </button>
+
+      </div>
+
+    </form>
+  </div>
+</section>
     );
 }

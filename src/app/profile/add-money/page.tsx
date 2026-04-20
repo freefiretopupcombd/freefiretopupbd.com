@@ -144,139 +144,180 @@ export default function ProfileAddMoneyPage() {
     const { contact_info } = siteSettings;
 
     return (
-        <div className="container mx-auto px-4 py-8 md:py-12 max-w-3xl">
-            <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden mb-8">
-                <div className="bg-gray-50 px-6 py-5 border-b border-gray-100 flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                        <svg className="w-6 h-6 text-pink-500" viewBox="0 0 24 24">
-                            <path fill="currentColor" d="M3 4V16H21V4H3M3 2H21C22.1 2 23 2.89 23 4V16C23 16.53 22.79 17.04 22.41 17.41C22.04 17.79 21.53 18 21 18H14V20H16V22H8V20H10V18H3C2.47 18 1.96 17.79 1.59 17.41C1.21 17.04 1 16.53 1 16V4C1 2.89 1.89 2 3 2M10.84 8.93C11.15 8.63 11.57 8.45 12 8.45C12.43 8.46 12.85 8.63 13.16 8.94C13.46 9.24 13.64 9.66 13.64 10.09C13.64 10.53 13.46 10.94 13.16 11.25C12.85 11.56 12.43 11.73 12 11.73C11.57 11.73 11.15 11.55 10.84 11.25C10.54 10.94 10.36 10.53 10.36 10.09C10.36 9.66 10.54 9.24 10.84 8.93M10.07 12C10.58 12.53 11.28 12.82 12 12.82C12.72 12.82 13.42 12.53 13.93 12C14.44 11.5 14.73 10.81 14.73 10.09C14.73 9.37 14.44 8.67 13.93 8.16C13.42 7.65 12.72 7.36 12 7.36C11.28 7.36 10.58 7.65 10.07 8.16C9.56 8.67 9.27 9.37 9.27 10.09C9.27 10.81 9.56 11.5 10.07 12M6 10.09C6.94 7.7 9.27 6 12 6C14.73 6 17.06 7.7 18 10.09C17.06 12.5 14.73 14.18 12 14.18C9.27 14.18 6.94 12.5 6 10.09Z"></path>
-                        </svg>
-                        <h2 className="text-xl font-bold text-gray-800">Add Money to Wallet</h2>
+    <div className="w-full max-w-3xl mx-auto px-4 sm:px-6 py-6 sm:py-10 bg-[#0b1224] text-white">
+
+        {/* MAIN CARD */}
+        <div className="bg-[#0f172a] border border-white/10 rounded-2xl sm:rounded-3xl shadow-xl overflow-hidden">
+
+            {/* HEADER */}
+            <div className="px-4 sm:px-6 py-5 border-b border-white/10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 backdrop-blur-xl bg-white/5">
+
+                <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-pink-500 to-red-500 flex items-center justify-center shadow-lg">
+                        💰
                     </div>
-                    <div className="flex bg-gray-200 p-1 rounded-xl">
-                        <button 
-                            onClick={() => setPaymentType('instant')}
-                            className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all ${paymentType === 'instant' ? 'bg-white shadow-sm text-pink-500' : 'text-gray-500 hover:text-gray-700'}`}
-                        >
-                            Instant Pay
-                        </button>
-                        <button 
-                            onClick={() => setPaymentType('manual')}
-                            className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all ${paymentType === 'manual' ? 'bg-white shadow-sm text-pink-500' : 'text-gray-500 hover:text-gray-700'}`}
-                        >
-                            Manual Pay
-                        </button>
-                    </div>
+
+                    <h2 className="text-base sm:text-xl font-bold">
+                        Add Money to Wallet
+                    </h2>
                 </div>
-                
-                <div className="p-8">
-                    <div className="max-w-md mx-auto relative">
-                        {/* decorative background element */}
-                        <div className="absolute -inset-4 bg-gradient-to-r from-pink-100 to-red-50 opacity-50 blur-xl rounded-full z-0"></div>
-                        
-                        <div className="relative z-10 bg-white p-6 rounded-2xl shadow-sm border border-pink-100">
-                            <label className="block text-center text-sm font-medium text-gray-500 uppercase tracking-wider mb-4">Enter Amount to Add</label>
-                            
-                            <div className="relative flex items-center justify-center mb-6">
-                                <span className="absolute left-6 text-3xl font-bold text-gray-400">৳</span>
-                                <input
-                                    type="text"
-                                    placeholder="0.00"
-                                    value={amount}
-                                    onChange={handleAmountChange}
-                                    className="w-full text-center text-5xl font-bold text-gray-800 bg-transparent border-0 border-b-2 border-gray-200 focus:border-pink-500 focus:ring-0 py-4 outline-none transition-colors placeholder-gray-300"
-                                    autoFocus
-                                />
-                            </div>
 
-                            {paymentType === 'manual' && (
-                                <div className="mb-6 space-y-5 animate-in fade-in slide-in-from-top-2 duration-300">
-                                    <div className="border-t border-gray-100 pt-4">
-                                        <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Select Method</p>
-                                        <div className="flex flex-wrap gap-2">
-                                            {manualMethods.map(method => (
-                                                <button
-                                                    key={method.id}
-                                                    type="button"
-                                                    onClick={() => setSelectedMethod(method)}
-                                                    className={`px-4 py-2 rounded-xl text-sm font-bold border transition-all ${selectedMethod?.id === method.id ? 'bg-pink-500 border-pink-500 text-white shadow-lg shadow-pink-200' : 'bg-white border-gray-100 text-gray-600 hover:border-pink-200'}`}
-                                                >
-                                                    {method.name}
-                                                </button>
-                                            ))}
-                                        </div>
-                                    </div>
+                <div className="flex p-1 rounded-xl bg-white/10 backdrop-blur-md w-full sm:w-auto">
+                    <button
+                        onClick={() => setPaymentType('instant')}
+                        className={`w-1/2 sm:w-auto px-4 py-2 rounded-lg text-xs font-bold transition ${
+                            paymentType === 'instant'
+                                ? 'bg-gradient-to-r from-pink-500 to-red-500 text-white shadow-md'
+                                : 'text-gray-300'
+                        }`}
+                    >
+                        Instant
+                    </button>
 
-                                    {selectedMethod && (
-                                        <div className="bg-pink-50 p-4 rounded-2xl border border-pink-100">
-                                            <p className="text-[10px] font-black text-pink-400 uppercase tracking-widest mb-1">Target Account</p>
-                                            <p className="text-lg font-black text-gray-800">{selectedMethod.phone}</p>
-                                            <p className="text-[10px] text-pink-500/70 mt-1 font-bold">উপরে দেয়া নাম্বার এ আপনাকে প্রথমে টাকা সেন্টমানি করতে হবে..</p>
-                                        </div>
-                                    )}
-
-                                    <div className="space-y-3">
-                                        <div>
-                                            <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1 block">Sender Number</label>
-                                            <input 
-                                                type="text" 
-                                                value={senderNumber}
-                                                onChange={(e) => setSenderNumber(e.target.value)}
-                                                placeholder="01XXXXXXXXX"
-                                                className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-100 text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-pink-500/20 focus:border-pink-500 transition-all"
-                                            />
-                                        </div>
-                                        <div>
-                                            <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1 block">Transaction ID</label>
-                                            <input 
-                                                type="text" 
-                                                value={transactionId}
-                                                onChange={(e) => setTransactionId(e.target.value)}
-                                                placeholder="Enter TrxID"
-                                                className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-100 text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-pink-500/20 focus:border-pink-500 transition-all uppercase"
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                            )}
-                            
-                            {error && <p className="text-red-500 text-sm font-medium text-center mb-4">{error}</p>}
-                            
-                            <button
-                                type="button"
-                                onClick={handleBuyNow}
-                                disabled={!isValidAmount || loading}
-                                className="w-full bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white font-bold py-4 px-6 rounded-xl shadow-md transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:-translate-y-0.5"
-                            >
-                                {loading ? "Processing..." : (paymentType === 'manual' ? "Submit Request" : "Proceed to Payment")}
-                            </button>
-                        </div>
-                    </div>
+                    <button
+                        onClick={() => setPaymentType('manual')}
+                        className={`w-1/2 sm:w-auto px-4 py-2 rounded-lg text-xs font-bold transition ${
+                            paymentType === 'manual'
+                                ? 'bg-gradient-to-r from-pink-500 to-red-500 text-white shadow-md'
+                                : 'text-gray-300'
+                        }`}
+                    >
+                        Manual
+                    </button>
                 </div>
             </div>
 
-            {contact_info?.how_to_add_money && (
-                <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
-                    <div className="bg-gray-50 px-6 py-5 border-b border-gray-100 flex items-center gap-3">
-                        <svg className="w-6 h-6 text-blue-500" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
-                        </svg>
-                        <h2 className="text-xl font-bold text-gray-800">How to Add Money</h2>
-                    </div>
-                    <div className="p-4 md:p-6">
-                        <div className="aspect-w-16 aspect-h-9 rounded-2xl overflow-hidden bg-gray-100 border border-gray-200">
-                            <iframe
-                                title="Add Money Tutorial"
-                                src={contact_info.how_to_add_money}
-                                referrerPolicy="strict-origin-when-cross-origin"
-                                className="w-full h-full min-h-[300px] md:min-h-[400px]"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowFullScreen
-                            ></iframe>
+            {/* BODY */}
+            <div className="p-4 sm:p-8">
+
+                <div className="relative max-w-md mx-auto">
+
+                    {/* glow background */}
+                    <div className="absolute inset-0 bg-pink-500/10 blur-3xl rounded-full"></div>
+
+                    <div className="relative bg-[#0b1224]/80 border border-white/10 backdrop-blur-xl p-4 sm:p-6 rounded-2xl shadow-lg">
+
+                        <label className="block text-center text-xs sm:text-sm text-gray-400 uppercase mb-3">
+                            Enter Amount
+                        </label>
+
+                        {/* AMOUNT */}
+                        <div className="relative flex justify-center mb-6">
+
+                            <span className="absolute left-4 sm:left-6 text-2xl sm:text-3xl text-gray-400">
+                                ৳
+                            </span>
+
+                            <input
+                                type="text"
+                                value={amount}
+                                onChange={handleAmountChange}
+                                placeholder="0.00"
+                                className="w-full text-center text-3xl sm:text-5xl font-bold bg-transparent border-b-2 border-white/10 focus:border-pink-500 outline-none py-3"
+                            />
                         </div>
+
+                        {/* MANUAL SECTION */}
+                        {paymentType === 'manual' && (
+                            <div className="space-y-5">
+
+                                {/* METHODS */}
+                                <div>
+                                    <p className="text-[10px] text-gray-400 uppercase mb-2">
+                                        Payment Method
+                                    </p>
+
+                                    <div className="flex flex-wrap gap-2">
+                                        {manualMethods.map((m) => (
+                                            <button
+                                                key={m.id}
+                                                onClick={() => setSelectedMethod(m)}
+                                                className={`px-4 py-2 text-xs rounded-xl border transition ${
+                                                    selectedMethod?.id === m.id
+                                                        ? 'bg-gradient-to-r from-pink-500 to-red-500 text-white border-transparent shadow-md'
+                                                        : 'bg-white/5 text-gray-300 border-white/10'
+                                                }`}
+                                            >
+                                                {m.name}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {/* ACCOUNT */}
+                                {selectedMethod && (
+                                    <div className="p-4 rounded-xl bg-white/5 border border-white/10">
+                                        <p className="text-[10px] text-pink-400 uppercase">
+                                            Send Money To
+                                        </p>
+                                        <p className="text-lg font-bold text-white">
+                                            {selectedMethod.phone}
+                                        </p>
+                                    </div>
+                                )}
+
+                                {/* INPUTS */}
+                                <div className="space-y-3">
+
+                                    <input
+                                        value={senderNumber}
+                                        onChange={(e) => setSenderNumber(e.target.value)}
+                                        placeholder="Sender Number"
+                                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white text-sm outline-none focus:border-pink-500"
+                                    />
+
+                                    <input
+                                        value={transactionId}
+                                        onChange={(e) => setTransactionId(e.target.value)}
+                                        placeholder="Transaction ID"
+                                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white text-sm uppercase outline-none focus:border-pink-500"
+                                    />
+                                </div>
+                            </div>
+                        )}
+
+                        {/* ERROR */}
+                        {error && (
+                            <p className="text-red-400 text-sm text-center mt-4">
+                                {error}
+                            </p>
+                        )}
+
+                        {/* BUTTON */}
+                        <button
+                            onClick={handleBuyNow}
+                            disabled={!isValidAmount || loading}
+                            className="w-full mt-6 py-3 rounded-xl font-bold text-white
+                            bg-gradient-to-r from-pink-500 to-red-500
+                            hover:from-pink-600 hover:to-red-600
+                            shadow-lg transition disabled:opacity-50"
+                        >
+                            {loading ? "Processing..." : "Continue Payment"}
+                        </button>
                     </div>
                 </div>
-            )}
+            </div>
         </div>
-    );
+
+        {/* VIDEO SECTION */}
+        {contact_info?.how_to_add_money && (
+            <div className="mt-6 bg-[#0f172a] border border-white/10 rounded-2xl overflow-hidden">
+
+                <div className="px-4 py-4 border-b border-white/10 text-white font-bold">
+                    How to Add Money
+                </div>
+
+                <div className="p-3 sm:p-6">
+                    <div className="w-full aspect-video rounded-xl overflow-hidden border border-white/10">
+                        <iframe
+                            src={contact_info.how_to_add_money}
+                            className="w-full h-full"
+                            allowFullScreen
+                        />
+                    </div>
+                </div>
+            </div>
+        )}
+    </div>
+);
 }

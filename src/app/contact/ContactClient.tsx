@@ -1,21 +1,21 @@
 "use client";
 
-import React from 'react';
-import { useSiteSettings } from '@/context/SiteSettingsContext';
+import React from "react";
+import { useSiteSettings } from "@/context/SiteSettingsContext";
 import {
   FaPhoneAlt,
   FaFacebookMessenger,
   FaWhatsapp,
   FaEnvelope,
-  FaClock
-} from 'react-icons/fa';
+  FaClock,
+} from "react-icons/fa";
 
 export default function ContactClient() {
   const siteSettings = useSiteSettings();
 
   if (!siteSettings) {
     return (
-      <div className="min-h-[50vh] flex items-center justify-center text-gray-500">
+      <div className="min-h-[50vh] flex items-center justify-center text-slate-400">
         Loading...
       </div>
     );
@@ -24,108 +24,110 @@ export default function ContactClient() {
   const { contact_info } = siteSettings;
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-10 md:py-14">
+    <div className="max-w-5xl mx-auto px-4 py-10 md:py-14 text-white">
 
-      {/* Header */}
-      <div className="text-center mb-10 md:mb-12">
-        <h1 className="text-3xl md:text-5xl font-bold mb-3">
+      {/* HEADER */}
+      <div className="text-center mb-12">
+
+        <h1 className="text-3xl md:text-5xl font-bold">
           Contact Us
         </h1>
 
-        <p className="text-gray-500 text-sm md:text-base max-w-xl mx-auto">
-          Free Fire diamond top-up support — আমরা 24/7 আপনার সাহায্যে প্রস্তুত
+        <p className="text-slate-400 text-sm md:text-base max-w-xl mx-auto mt-3">
+          Free Fire diamond top-up support — 24/7 active support system
         </p>
 
-        {/* Trust badge */}
-        <div className="mt-4 flex items-center justify-center gap-2 text-xs md:text-sm text-gray-500">
-          <FaClock className="text-red-500" />
-          <span>Avg response time: 1–5 minutes</span>
+        {/* STATUS BADGE */}
+        <div className="mt-5 flex items-center justify-center gap-2 text-sm text-slate-400">
+          <FaClock className="text-orange-400" />
+          <span>Average response time: 1–5 minutes</span>
         </div>
+
       </div>
 
-      {/* Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+      {/* CARDS */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
 
-        {/* Phone */}
+        {/* PHONE */}
         {contact_info?.phone_number && (
           <a
             href={`tel:${contact_info.phone_number}`}
-            className="flex items-center gap-4 p-4 md:p-6 bg-white border border-gray-100 rounded-xl shadow-sm active:scale-[0.98] hover:shadow-md transition"
+            className="group flex items-center gap-4 p-5 bg-slate-900 border border-slate-800 rounded-2xl shadow-md hover:shadow-xl hover:border-slate-700 transition"
           >
-            <div className="w-11 h-11 flex items-center justify-center rounded-xl bg-blue-100 text-blue-600 shrink-0">
+            <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-blue-500/10 text-blue-400 group-hover:scale-110 transition">
               <FaPhoneAlt />
             </div>
 
             <div>
-              <h3 className="text-base md:text-lg font-semibold">
+              <h3 className="text-base font-semibold text-white">
                 Direct Call
               </h3>
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-slate-400">
                 {contact_info.phone_number}
               </p>
             </div>
           </a>
         )}
 
-        {/* Messenger */}
+        {/* MESSENGER */}
         {contact_info?.facebook && (
           <a
             href={contact_info.facebook}
             target="_blank"
-            className="flex items-center gap-4 p-4 md:p-6 bg-white border border-gray-100 rounded-xl shadow-sm active:scale-[0.98] hover:shadow-md transition"
+            className="group flex items-center gap-4 p-5 bg-slate-900 border border-slate-800 rounded-2xl shadow-md hover:shadow-xl transition"
           >
-            <div className="w-11 h-11 flex items-center justify-center rounded-xl bg-pink-100 text-pink-600 shrink-0">
+            <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-pink-500/10 text-pink-400 group-hover:scale-110 transition">
               <FaFacebookMessenger />
             </div>
 
             <div>
-              <h3 className="text-base md:text-lg font-semibold">
+              <h3 className="text-base font-semibold text-white">
                 Messenger
               </h3>
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-slate-400">
                 Chat instantly
               </p>
             </div>
           </a>
         )}
 
-        {/* WhatsApp (HIGHLIGHTED) */}
+        {/* WHATSAPP */}
         {contact_info?.whatsapp_number && (
           <a
             href={`https://wa.me/${contact_info.whatsapp_number}`}
             target="_blank"
-            className="flex items-center gap-4 p-4 md:p-6 bg-green-50 border border-green-200 rounded-xl shadow-md hover:shadow-lg active:scale-[0.98] transition"
+            className="group flex items-center gap-4 p-5 bg-slate-900 border border-slate-800 rounded-2xl shadow-lg hover:shadow-2xl hover:border-green-500/40 transition"
           >
-            <div className="w-11 h-11 flex items-center justify-center rounded-xl bg-green-100 text-green-600 shrink-0">
+            <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-green-500/10 text-green-400 group-hover:scale-110 transition">
               <FaWhatsapp />
             </div>
 
             <div>
-              <h3 className="text-base md:text-lg font-semibold text-green-700">
+              <h3 className="text-base font-semibold text-green-400">
                 WhatsApp Support
               </h3>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-slate-400">
                 Fastest response (Recommended)
               </p>
             </div>
           </a>
         )}
 
-        {/* Email */}
+        {/* EMAIL */}
         {contact_info?.email && (
           <a
             href={`mailto:${contact_info.email}`}
-            className="flex items-center gap-4 p-4 md:p-6 bg-white border border-gray-100 rounded-xl shadow-sm active:scale-[0.98] hover:shadow-md transition"
+            className="group flex items-center gap-4 p-5 bg-slate-900 border border-slate-800 rounded-2xl shadow-md hover:shadow-xl transition"
           >
-            <div className="w-11 h-11 flex items-center justify-center rounded-xl bg-yellow-100 text-yellow-600 shrink-0">
+            <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-yellow-500/10 text-yellow-400 group-hover:scale-110 transition">
               <FaEnvelope />
             </div>
 
             <div>
-              <h3 className="text-base md:text-lg font-semibold">
+              <h3 className="text-base font-semibold text-white">
                 Email Support
               </h3>
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-slate-400">
                 {contact_info.email}
               </p>
             </div>
@@ -134,15 +136,17 @@ export default function ContactClient() {
 
       </div>
 
-      {/* Bottom info */}
-      <div className="mt-10 md:mt-12 text-center bg-gray-50 p-5 md:p-6 rounded-xl">
+      {/* FOOTER */}
+      <div className="mt-12 text-center p-6 rounded-2xl bg-slate-900 border border-slate-800">
+
         <h3 className="text-lg font-semibold mb-2">
           Need help with order?
         </h3>
 
-        <p className="text-sm text-gray-500">
-          Payment issue • Delivery delay • Top-up problem — আমরা সাহায্য করতে প্রস্তুত
+        <p className="text-sm text-slate-400">
+          Payment issue • Delivery delay • Top-up problem — আমরা 24/7 support দিচ্ছি
         </p>
+
       </div>
 
     </div>

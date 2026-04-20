@@ -91,7 +91,7 @@ export default async function HomePage({ searchParams }: { searchParams: { page?
                 <div className="text-center mb-6 mt-10">
                     <div className="flex items-center justify-center px-4 py-4 md:py-8">
                         <hr className="flex-grow border-gray-300" />
-                        <h1 className="text-2xl sm:text-3xl font-bold mx-4 text-gray-900 font-primary">Free Fire Top Up BD</h1>
+                        <h1 className="text-2xl sm:text-3xl font-bold mx-4 text-white-900 font-primary">Free Fire Top Up BD</h1>
                         <hr className="flex-grow border-gray-300" />
                     </div>
                 </div>
@@ -101,7 +101,7 @@ export default async function HomePage({ searchParams }: { searchParams: { page?
                 <div className="text-center mb-6 mt-10">
                     <div className="flex items-center justify-center px-4 py-4 md:py-8">
                         <hr className="flex-grow border-gray-300" />
-                        <h3 className="text-2xl sm:text-3xl font-bold mx-4 text-gray-900 font-primary">Gift Cards/Vouchers</h3>
+                        <h3 className="text-2xl sm:text-3xl font-bold mx-4 text-white-900 font-primary">Gift Cards/Vouchers</h3>
                         <hr className="flex-grow border-gray-300" />
                     </div>
                 </div>

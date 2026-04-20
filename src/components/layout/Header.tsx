@@ -48,47 +48,108 @@ export default function Header() {
     const handleSidebarToggle = () => setIsSidebarVisible(!isSidebarVisible);
 
     return (
-        <>
-            <div className={`header fixed top-0 left-0 w-full z-50 transition-all ${isScrolled ? 'bg-white/90 shadow-md backdrop-blur-md' : 'bg-white/80 shadow-sm backdrop-blur-md'}`}>
-                <div className="container mx-auto p-2 py-3 md:py-5 md:px-0">
-                    <nav className="flex items-center justify-between">
-                        <Link href="/">
-                            <img src="/src_assets/img/freefiretopupbd.png" alt="Logo" className="w-28 md:w-48 object-contain h-12" />
-                        </Link>
-                        
-                        <form onSubmit={search} className={`search-form flex-grow mx-4 relative ${isSearchActive ? 'block' : 'hidden md:block'}`}>
-                            <input
-                                type="text"
-                                value={query}
-                                onChange={(e) => setQuery(e.target.value)}
-                                placeholder="Search..."
-                                className="border border-red-500 rounded px-4 py-2 w-full text-black pl-10 focus:outline-none focus:ring-2 focus:ring-red-500/50"
-                                required
-                            />
-                        </form>
+        <><div
+  className={`fixed top-0 left-0 w-full z-50 transition-all duration-300
+  ${
+    isScrolled
+      ? "bg-[#0b1224]/80 backdrop-blur-2xl border-b border-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.6)]"
+      : "bg-[#0b1224]/40 backdrop-blur-xl border-b border-white/5"
+  }`}
+>
+  <div className="container mx-auto px-4 md:px-6 py-3 md:py-4">
 
-                        <div className="flex items-center gap-4">
-                            <div className="hidden md:flex gap-4">
-                                <Link href="/topup" className="font-bold p-2 hover:text-red-500 transition-colors">Topup</Link>
-                                <Link href="/faq" className="font-bold p-2 hover:text-red-500 transition-colors">FAQ</Link>
-                                <Link href="/contact" className="font-bold p-2 hover:text-red-500 transition-colors">Contact US</Link>
-                            </div>
-                            
-                            {!user ? (
-                                <div className="flex gap-2">
-                                    <Link href="/login" className="px-4 py-2 border-2 border-red-500 text-red-500 rounded font-semibold hover:bg-red-50 transition-colors">Login</Link>
-                                    <Link href="/register" className="px-4 py-2 bg-red-500 text-white rounded font-semibold hover:bg-red-600 transition-colors">Register</Link>
-                                </div>
-                            ) : (
-                                <button onClick={handleSidebarToggle} className="flex items-center gap-2 border rounded-full px-4 py-1 hover:bg-gray-50 transition-colors">
-                                    <img src="/src_assets/img/default.png" alt="Profile" className="w-8 h-8 rounded-full" />
-                                    <span className="text-sm font-medium">{user?.name?.length > 12 ? `${user.name.substring(0, 12)}...` : user.name}</span>
-                                </button>
-                            )}
-                        </div>
-                    </nav>
-                </div>
-            </div>
+    <nav className="flex items-center justify-between gap-4">
+
+      {/* LOGO */}
+      <Link href="/" className="flex items-center">
+        <img
+          src="/src_assets/img/freefiretopupbd.png"
+          alt="Logo"
+          className="w-28 md:w-40 h-20 object-contain hover:scale-105 transition"
+        />
+      </Link>
+
+      {/* SEARCH */}
+      <form
+        onSubmit={search}
+        className={`flex-1 max-w-xl relative hidden md:block`}
+      >
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search products, topup, offers..."
+          className="w-full px-4 py-2.5 pl-10 rounded-xl
+          bg-[#0f172a]/60 text-white placeholder:text-gray-400
+          border border-white/10
+          focus:outline-none focus:ring-2 focus:ring-pink-500/40
+          focus:border-pink-500 transition"
+          required
+        />
+
+        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+          🔍
+        </span>
+      </form>
+
+      {/* MENU */}
+      <div className="flex items-center gap-3 md:gap-6">
+
+        <div className="hidden md:flex items-center gap-5 text-sm">
+          <Link href="/topup" className="text-gray-300 hover:text-white transition">
+            Topup
+          </Link>
+          <Link href="/faq" className="text-gray-300 hover:text-white transition">
+            FAQ
+          </Link>
+          <Link href="/contact" className="text-gray-300 hover:text-white transition">
+            Contact
+          </Link>
+        </div>
+
+        {/* AUTH */}
+        {!user ? (
+          <div className="flex items-center gap-2">
+
+            <Link
+              href="/login"
+              className="px-4 py-2 rounded-xl border border-pink-500 text-pink-400 hover:bg-pink-500/10 transition text-sm"
+            >
+              Login
+            </Link>
+
+            <Link
+              href="/register"
+              className="px-4 py-2 rounded-xl bg-gradient-to-r from-pink-500 to-red-500 text-white shadow-lg hover:scale-105 transition text-sm"
+            >
+              Register
+            </Link>
+
+          </div>
+        ) : (
+          <button
+            onClick={handleSidebarToggle}
+            className="flex items-center gap-2 px-3 py-1.5 rounded-full
+            bg-white/5 border border-white/10 hover:border-pink-500/30
+            hover:bg-white/10 transition"
+          >
+            <img
+              src="/src_assets/img/default.png"
+              className="w-8 h-8 rounded-full border border-white/10"
+            />
+            <span className="text-sm text-white font-medium">
+              {user?.name?.length > 12
+                ? `${user.name.substring(0, 12)}...`
+                : user.name}
+            </span>
+          </button>
+        )}
+
+      </div>
+    </nav>
+
+  </div>
+</div>
             {isSidebarVisible && <Sidebar onClose={() => setIsSidebarVisible(false)} />}
         </>
     );

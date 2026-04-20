@@ -29,46 +29,106 @@ export default function Sidebar({ onClose }: { onClose: () => void }) {
     console.log(user)
 
     return (
-        <div id="userMenu" className="bg-white rounded shadow-md absolute mt-12 top-0 right-0 min-w-full overflow-auto z-30">
-            <nav className="flex fixed items-center justify-between h-16 bg-white text-gray-700 border-b border-gray-200 z-10 srgameshop-navlist" style={{ position: 'fixed', bottom: '0px' }}>
-                <div className="z-10 fixed inset-0 transition-opacity" onClick={onClose}>
-                    <div tabIndex={0} className="absolute inset-0 bg-black opacity-50"></div>
-                </div>
-                <aside className="transform top-0 right-0 w-64 bg-white fixed h-full overflow-auto ease-in-out transition-all duration-300 z-30 translate-x-0" style={containerStyle}>
-                    <button id="userButton" className="flex items-center focus:outline-none p-3">
-                        <img src="/src_assets/img/default.png" style={{ height: '50px', backgroundColor: '#D81C4B', color: '#fff' }} alt="Profile" />
-                        <div>
-                            <div className="text-left w-full">
-                                <span className="px-3 font-normal font-primary">Hi, {user?.name?.length > 10 ? `${user.name.substring(0, 10)}...` : user.name}</span>
-                            </div>
-                            <div className="text-left">
-                                <span className="px-3 text-sm">{user?.email}</span>
+        <div className="fixed inset-0 z-50">
+
+            {/* BACKDROP */}
+            <div
+                className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+                onClick={onClose}
+            />
+
+            {/* SIDEBAR */}
+            <aside
+                className="
+                    absolute right-0 top-0 h-full w-72
+                    bg-[#0b1224] border-l border-white/10
+                    shadow-[0_0_40px_rgba(0,0,0,0.6)]
+                    flex flex-col
+                "
+                style={containerStyle}
+            >
+
+                {/* SCROLL AREA */}
+                <div className="flex-1 overflow-y-auto">
+
+                    {/* USER HEADER */}
+                    <div className="p-5 border-b border-white/10">
+                        <div className="flex items-center gap-3">
+                            <img
+                                src="/src_assets/img/default.png"
+                                className="w-12 h-12 rounded-full border border-pink-500/30"
+                            />
+
+                            <div>
+                                <p className="text-white font-semibold">
+                                    Hi, {user?.name?.length > 10
+                                        ? `${user.name.substring(0, 10)}...`
+                                        : user.name}
+                                </p>
+
+                                <p className="text-xs text-gray-400">
+                                    {user?.email}
+                                </p>
                             </div>
                         </div>
+                        <button
+                        onClick={handleLogout}
+                        className="w-full py-2.5 mt-5 rounded-xl bg-gradient-to-r from-red-500 to-pink-500
+                        text-white font-medium shadow-lg hover:scale-[1.02] transition"
+                    >
+                        Logout
                     </button>
-                    <div className="w-full mx-auto text-center">
-                        <button onClick={handleLogout} className="focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium rounded-md text-sm gap-x-1.5 px-2.5 py-1.5 shadow-sm text-white bg-red-500 hover:bg-red-600 inline-flex items-center mb-2">
-                            <span className="flex items-center justify-center p-0">
-                                <span className="no-underline text-xs">Logout</span>
-                            </span>
-                        </button>
                     </div>
-                    <hr />
-                    <Link href="/profile" onClick={onClose} className="text-gray-900 no-underline block p-4 hover:bg-gray-100"> My Account </Link>
-                    <Link href="/profile/order" onClick={onClose} className="text-gray-900 no-underline block p-4 hover:bg-gray-100"> My Orders </Link>
-                    <Link href="/profile/my-codes" onClick={onClose} className="text-gray-900 no-underline block p-4 hover:bg-gray-100"> My Codes </Link>
-                    <Link href="/profile/transactions" onClick={onClose} className="text-gray-900 no-underline block p-4 hover:bg-gray-100"> My Transaction </Link>
-                    <Link href="/profile/add-money" onClick={onClose} className="text-gray-900 no-underline block p-4 hover:bg-gray-100"> Add Money </Link>
-                    <Link href="/contact" onClick={onClose} className="text-gray-900 no-underline block p-4 hover:bg-gray-100"> Contact Us </Link>
-                    <Link href="/faq" onClick={onClose} className="text-gray-900 no-underline block p-4 hover:bg-gray-100">FAQ</Link>
-                    <hr />
-                    <div className="w-full mx-auto text-center mt-3">
-                        <a href="https://wa.me/+8801317956376" target="_blank" rel="noopener noreferrer" className="align-middle bg-pink-500 hover:bg-pink-400 text-white text-sm font-semibold rounded-lg inline-block shadow-lg px-6 py-2 mb-2">
-                            Support
-                        </a>
+
+                    {/* MENU */}
+                    <div className="px-2 py-3 space-y-1 text-sm">
+                        {[
+                            { href: "/profile", label: "My Account" },
+                            { href: "/profile/order", label: "My Orders" },
+                            { href: "/profile/my-codes", label: "My Codes" },
+                            { href: "/profile/transactions", label: "My Transactions" },
+                            { href: "/profile/add-money", label: "Add Money" },
+                            { href: "/contact", label: "Contact Us" },
+                            { href: "/faq", label: "FAQ" },
+                        ].map((item, i) => (
+                            <Link
+                                key={i}
+                                href={item.href}
+                                onClick={onClose}
+                                className="block px-4 py-3 rounded-lg text-gray-300
+                                hover:bg-white/5 hover:text-white transition"
+                            >
+                                {item.label}
+                            </Link>
+                        ))}
+
+                        
+
                     </div>
-                </aside>
-            </nav>
+
+                    <div className="p-4 border-t border-white/10">
+
+                    
+
+                    <a
+                        href="https://wa.me/+8801317956376"
+                        target="_blank"
+                        className="block mt-3 text-center py-3 rounded-xl
+                        bg-green-500 text-white font-semibold shadow-lg
+                        hover:bg-green-600 transition"
+                    >
+                        💬 Support
+                    </a>
+
+                </div>
+
+                </div>
+
+                {/* BOTTOM FIXED AREA */}
+                
+
+            </aside>
+
         </div>
     );
 }

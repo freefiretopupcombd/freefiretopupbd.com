@@ -36,79 +36,88 @@ export default function ForgotPasswordPage() {
     }
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4 py-12 relative overflow-hidden">
-             {/* Decorative Background */}
-             <div className="absolute top-0 right-0 -mt-20 -mr-20 w-64 h-64 bg-pink-200 rounded-full opacity-20 blur-3xl p-10 z-0"></div>
-            <div className="absolute bottom-0 left-0 -mb-20 -ml-20 w-64 h-64 bg-violet-200 rounded-full opacity-20 blur-3xl p-10 z-0"></div>
+  <div className="min-h-screen flex items-center justify-center px-4 bg-[#070b18] relative overflow-hidden">
 
-            <div className="max-w-md w-full relative z-10 bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100">
-                <div className="bg-gradient-to-r from-pink-500 to-violet-500 p-8 text-center">
-                    <h2 className="text-3xl font-extrabold text-white mb-2">Forgot Password</h2>
-                    <p className="text-pink-100 text-sm opacity-90">Enter your email to receive a reset link</p>
-                </div>
+    {/* Glow Background */}
+    <div className="absolute w-[500px] h-[500px] bg-pink-500/20 blur-[120px] rounded-full -top-40 -right-40" />
+    <div className="absolute w-[500px] h-[500px] bg-blue-500/20 blur-[120px] rounded-full -bottom-40 -left-40" />
 
-                <div className="p-8">
-                    {errors.length > 0 && (
-                        <div className="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 rounded-md mb-6 relative shadow-sm text-sm">
-                             <button
-                                className="absolute top-2 right-2 text-red-400 hover:text-red-600 focus:outline-none"
-                                onClick={() => setErrors([])}
-                            >
-                                ✕
-                            </button>
-                            {errors.map((error, idx) => (
-                                <p key={idx}>{error}</p>
-                            ))}
-                        </div>
-                    )}
-                    
-                    {message && (
-                        <div className="bg-green-50 border-l-4 border-green-500 text-green-700 p-4 rounded-md mb-6 shadow-sm text-sm">
-                            <p className="font-medium flex items-center gap-2"><span className="text-lg">✓</span> {message}</p>
-                        </div>
-                    )}
+    {/* Card */}
+    <div className="w-full max-w-md relative z-10">
 
-                    <form onSubmit={handleForgotPassword} className="space-y-6">
-                        <div>
-                            <label htmlFor="email" className="block text-sm font-bold text-gray-700 mb-2">Email Address</label>
-                            <input
-                                id="email"
-                                name="email"
-                                type="email"
-                                required
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                className="appearance-none relative block w-full px-4 py-3 border border-gray-300 placeholder-gray-400 text-gray-900 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-shadow shadow-sm"
-                                placeholder="you@example.com"
-                            />
-                        </div>
+      <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl overflow-hidden">
 
-                        <div>
-                            <button
-                                type="submit"
-                                disabled={isLoading}
-                                className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-bold rounded-xl text-white bg-gradient-to-r from-pink-500 to-violet-500 hover:from-pink-600 hover:to-violet-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 transition-all shadow-md hover:shadow-lg disabled:opacity-70"
-                            >
-                                {isLoading ? (
-                                    <span className="flex items-center gap-2">
-                                        <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-                                        Sending Link...
-                                    </span>
-                                ) : "Send Reset Link"}
-                            </button>
-                        </div>
-                    </form>
-                </div>
-                
-                <div className="bg-gray-50 px-8 py-5 border-t border-gray-100 text-center">
-                    <p className="text-sm text-gray-600">
-                        Remember your password?{' '}
-                        <Link href="/login" className="font-bold text-pink-600 hover:text-pink-500 transition-colors">
-                            Back to Login
-                        </Link>
-                    </p>
-                </div>
-            </div>
+        {/* Header */}
+        <div className="p-8 text-center border-b border-white/10 bg-gradient-to-r from-pink-500/10 to-blue-500/10">
+          <h2 className="text-3xl font-bold text-white">
+            Forgot Password
+          </h2>
+          <p className="text-gray-400 text-sm mt-2">
+            Enter your email to get reset link
+          </p>
         </div>
-    );
+
+        {/* Body */}
+        <div className="p-8 space-y-5">
+
+          {/* Error */}
+          {errors.length > 0 && (
+            <div className="bg-red-500/10 border border-red-500/30 text-red-300 p-3 rounded-xl text-sm">
+              {errors.map((e, i) => (
+                <p key={i}>• {e}</p>
+              ))}
+            </div>
+          )}
+
+          {/* Success */}
+          {message && (
+            <div className="bg-green-500/10 border border-green-500/30 text-green-300 p-3 rounded-xl text-sm">
+              ✓ {message}
+            </div>
+          )}
+
+          <form onSubmit={handleForgotPassword} className="space-y-4">
+
+            {/* Email */}
+            <div>
+              <label className="text-xs text-gray-400 mb-2 block">
+                Email Address
+              </label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="example@mail.com"
+                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white
+                focus:outline-none focus:border-pink-500/50 focus:ring-2 focus:ring-pink-500/20"
+              />
+            </div>
+
+            {/* Button */}
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="w-full py-3 rounded-xl font-semibold text-white
+              bg-gradient-to-r from-pink-500 to-blue-500
+              hover:opacity-90 transition-all shadow-lg shadow-pink-500/20"
+            >
+              {isLoading ? "Sending..." : "Send Reset Link"}
+            </button>
+
+          </form>
+
+          {/* Footer */}
+          <div className="text-center text-sm text-gray-400 pt-2">
+            Remember your password?{" "}
+            <Link href="/login" className="text-pink-400 font-semibold">
+              Back to Login
+            </Link>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+);
 }

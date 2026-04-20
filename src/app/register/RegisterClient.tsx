@@ -112,75 +112,89 @@ function RegisterContent() {
     }, [searchParams, router]);
 
     return (
-        <div className="container mx-auto px-4 py-12 flex justify-center min-h-[70vh]">
-            <div className="w-full max-w-md bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+        <div className="min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-[#0b1224] via-[#0f172a] to-[#020617]">
 
-                <h1 className="text-3xl font-bold text-gray-800 text-center mb-8">
-                    Create Account
-                </h1>
+            {/* background glow */}
+            <div className="absolute w-[400px] h-[400px] bg-pink-500/20 blur-[120px] rounded-full top-[-100px] left-[-100px]"></div>
+            <div className="absolute w-[400px] h-[400px] bg-blue-500/20 blur-[120px] rounded-full bottom-[-100px] right-[-100px]"></div>
 
-                <button
-                    type="button"
-                    onClick={googleLogin}
-                    disabled={loadingGoogle}
-                    className="w-full flex items-center justify-center gap-3 bg-white border border-gray-300 rounded-xl px-4 py-3 text-gray-700 font-medium hover:bg-gray-50 transition-colors shadow-sm disabled:opacity-70"
-                >
-                    Register with Google
-                </button>
+            <div className="relative w-full max-w-md">
 
-                <div className="flex items-center my-6">
-                    <div className="flex-grow border-t border-gray-200"></div>
-                    <span className="flex-shrink-0 mx-4 text-gray-400 text-sm">
-                        or sign up with email
-                    </span>
-                    <div className="flex-grow border-t border-gray-200"></div>
-                </div>
+                <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl p-8">
 
-                {errors.length > 0 && (
-                    <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl">
-                        {errors.map((error, idx) => (
-                            <p key={idx} className="text-red-600 text-sm text-center">
-                                {error}
-                            </p>
-                        ))}
-                    </div>
-                )}
+                    <h1 className="text-2xl font-bold text-white text-center">
+                        Create Account
+                    </h1>
+                    <p className="text-gray-400 text-sm text-center mt-1">
+                        Join us and start your journey
+                    </p>
 
-                {successMessage && (
-                    <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-xl text-green-700 text-sm text-center font-medium">
-                        {successMessage}
-                    </div>
-                )}
-
-                <form onSubmit={signup} className="space-y-4">
-
-                    <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Full Name" required className="w-full p-2 border rounded-xl" />
-
-                    <input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone" required className="w-full p-2 border rounded-xl" />
-
-                    <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" required className="w-full p-2 border rounded-xl" />
-
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" required className="w-full p-2 border rounded-xl" />
-
-                    <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Confirm Password" required className="w-full p-2 border rounded-xl" />
-
+                    {/* Google */}
                     <button
-                        type="submit"
-                        disabled={loading}
-                        className="w-full bg-pink-500 text-white py-3 rounded-xl mt-4"
+                        type="button"
+                        onClick={googleLogin}
+                        disabled={loadingGoogle}
+                        className="w-full mt-6 flex items-center justify-center gap-3 bg-white text-black rounded-xl px-4 py-3 font-medium hover:bg-gray-200 transition"
                     >
-                        {loading ? "Registering..." : "Create Account"}
+                        Continue with Google
                     </button>
 
-                </form>
+                    <div className="flex items-center my-6">
+                        <div className="flex-grow border-t border-white/10"></div>
+                        <span className="mx-3 text-gray-500 text-xs">or email</span>
+                        <div className="flex-grow border-t border-white/10"></div>
+                    </div>
 
-                <div className="mt-6 text-center text-sm text-gray-600">
-                    Already a member?{" "}
-                    <Link href="/login" className="text-pink-600 font-bold">
-                        Sign In Now
-                    </Link>
+                    {/* Errors */}
+                    {errors.length > 0 && (
+                        <div className="mb-4 p-3 bg-red-500/10 border border-red-500/20 rounded-xl">
+                            {errors.map((e, i) => (
+                                <p key={i} className="text-red-400 text-xs text-center">{e}</p>
+                            ))}
+                        </div>
+                    )}
+
+                    {/* Success */}
+                    {successMessage && (
+                        <div className="mb-4 p-3 bg-green-500/10 border border-green-500/20 rounded-xl">
+                            <p className="text-green-400 text-xs text-center">{successMessage}</p>
+                        </div>
+                    )}
+
+                    <form onSubmit={signup} className="space-y-3">
+
+                        <input className="w-full bg-white/5 border border-white/10 text-white placeholder-gray-500 p-3 rounded-xl outline-none focus:border-pink-500"
+                            value={name} onChange={(e) => setName(e.target.value)} placeholder="Full Name" />
+
+                        <input className="w-full bg-white/5 border border-white/10 text-white placeholder-gray-500 p-3 rounded-xl outline-none focus:border-pink-500"
+                            value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone" />
+
+                        <input className="w-full bg-white/5 border border-white/10 text-white placeholder-gray-500 p-3 rounded-xl outline-none focus:border-pink-500"
+                            value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
+
+                        <input type="password" className="w-full bg-white/5 border border-white/10 text-white placeholder-gray-500 p-3 rounded-xl outline-none focus:border-pink-500"
+                            value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
+
+                        <input type="password" className="w-full bg-white/5 border border-white/10 text-white placeholder-gray-500 p-3 rounded-xl outline-none focus:border-pink-500"
+                            value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Confirm Password" />
+
+                        <button
+                            type="submit"
+                            disabled={loading}
+                            className="w-full mt-4 py-3 rounded-xl font-bold text-white bg-gradient-to-r from-pink-500 to-red-500 hover:opacity-90 active:scale-[0.98] transition"
+                        >
+                            {loading ? "Creating..." : "Create Account"}
+                        </button>
+                    </form>
+
+                    <p className="text-center text-gray-400 text-xs mt-6">
+                        Already have an account?{" "}
+                        <Link href="/login" className="text-pink-400 font-semibold">
+                            Sign in
+                        </Link>
+                    </p>
+
                 </div>
-
             </div>
         </div>
     );

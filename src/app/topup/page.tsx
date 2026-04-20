@@ -49,7 +49,7 @@ export default async function TopUpPage({ searchParams }: { searchParams: { page
                 <div className="text-center mb-6 mt-10">
                     <div className="flex items-center justify-center px-4 py-4 md:py-8">
                         <hr className="flex-grow border-gray-300" />
-                        <h3 className="text-2xl sm:text-3xl font-bold mx-4 text-gray-900 font-primary">MOBILE GAMES TOP UP</h3>
+                        <h3 className="text-2xl sm:text-3xl font-bold mx-4 text-white-900 font-primary">MOBILE GAMES TOP UP</h3>
                         <hr className="flex-grow border-gray-300" />
                     </div>
                 </div>
@@ -59,7 +59,7 @@ export default async function TopUpPage({ searchParams }: { searchParams: { page
                 <div className="text-center mb-6 mt-10">
                     <div className="flex items-center justify-center px-4 py-4 md:py-8">
                         <hr className="flex-grow border-gray-300" />
-                        <h3 className="text-2xl sm:text-3xl font-bold mx-4 text-gray-900 font-primary">Gift Cards/Vouchers</h3>
+                        <h3 className="text-2xl sm:text-3xl font-bold mx-4 text-white-900 font-primary">Gift Cards/Vouchers</h3>
                         <hr className="flex-grow border-gray-300" />
                     </div>
                 </div>
@@ -70,7 +70,7 @@ export default async function TopUpPage({ searchParams }: { searchParams: { page
                     <Link href={`/topup?page=${page > 1 ? page - 1 : 1}`} className="flex items-center gap-2 px-6 py-2 bg-white border border-gray-300 rounded-lg shadow-sm hover:bg-gray-50 text-gray-700 font-bold transition-all">
                         <FaArrowLeft /> Previous
                     </Link>
-                    <span className="font-bold text-lg text-gray-700">Page {page}</span>
+                    <span className="font-bold text-lg text-white-700">Page {page}</span>
                     <Link href={`/topup?page=${page + 1}`} className="flex items-center gap-2 px-6 py-2 bg-white border border-gray-300 rounded-lg shadow-sm hover:bg-gray-50 text-gray-700 font-bold transition-all">
                         Next <FaArrowRight />
                     </Link>

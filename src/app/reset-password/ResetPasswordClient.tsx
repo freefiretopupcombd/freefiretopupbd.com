@@ -55,87 +55,96 @@ function ResetPasswordContent() {
     }
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4 py-12 relative overflow-hidden">
-             {/* Decorative Background */}
-             <div className="absolute top-0 right-0 -mt-20 -mr-20 w-64 h-64 bg-pink-200 rounded-full opacity-20 blur-3xl p-10 z-0"></div>
-            <div className="absolute bottom-0 left-0 -mb-20 -ml-20 w-64 h-64 bg-violet-200 rounded-full opacity-20 blur-3xl p-10 z-0"></div>
+  <div className="min-h-screen flex items-center justify-center px-4 bg-[#070b18] relative overflow-hidden">
 
-            <div className="max-w-md w-full relative z-10 bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100">
-                <div className="bg-gradient-to-r from-pink-500 to-violet-500 p-8 text-center">
-                    <h2 className="text-3xl font-extrabold text-white mb-2">Set New Password</h2>
-                    <p className="text-pink-100 text-sm opacity-90">Enter your new secure password below</p>
-                </div>
+    {/* Background Glow */}
+    <div className="absolute w-[500px] h-[500px] bg-pink-500/20 blur-[120px] rounded-full -top-32 -right-32" />
+    <div className="absolute w-[500px] h-[500px] bg-blue-500/20 blur-[120px] rounded-full -bottom-40 -left-40" />
 
-                <div className="p-8">
-                    {errors.length > 0 && (
-                        <div className="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 rounded-md mb-6 relative shadow-sm text-sm">
-                             <button
-                                className="absolute top-2 right-2 text-red-400 hover:text-red-600 focus:outline-none"
-                                onClick={() => setErrors([])}
-                            >
-                                ✕
-                            </button>
-                            {errors.map((error, idx) => (
-                                <p key={idx}>{error}</p>
-                            ))}
-                        </div>
-                    )}
-                    
-                    {message && (
-                        <div className="bg-green-50 border-l-4 border-green-500 text-green-700 p-4 rounded-md mb-6 shadow-sm text-sm">
-                            <p className="font-medium flex items-center gap-2"><span className="text-lg">✓</span> {message}</p>
-                            <p className="text-xs mt-1">Redirecting to login...</p>
-                        </div>
-                    )}
+    {/* Card */}
+    <div className="w-full max-w-md relative z-10">
 
-                    <form onSubmit={handleResetPassword} className="space-y-5">
-                         {/* Hidden fields just for accessibility/completeness, though strictly not needed in UI */}
-                        <input type="hidden" name="email" value={email} />
-                        <input type="hidden" name="token" value={token} />
+      <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl overflow-hidden">
 
-                        <div>
-                            <label className="block text-sm font-bold text-gray-700 mb-2">New Password</label>
-                            <input
-                                type="password"
-                                required
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                className="appearance-none relative block w-full px-4 py-3 border border-gray-300 placeholder-gray-400 text-gray-900 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-shadow shadow-sm"
-                                placeholder="••••••••"
-                            />
-                        </div>
-
-                        <div>
-                            <label className="block text-sm font-bold text-gray-700 mb-2">Confirm New Password</label>
-                            <input
-                                type="password"
-                                required
-                                value={passwordConfirmation}
-                                onChange={(e) => setPasswordConfirmation(e.target.value)}
-                                className="appearance-none relative block w-full px-4 py-3 border border-gray-300 placeholder-gray-400 text-gray-900 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-shadow shadow-sm"
-                                placeholder="••••••••"
-                            />
-                        </div>
-
-                        <div className="pt-2">
-                            <button
-                                type="submit"
-                                disabled={isLoading}
-                                className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-bold rounded-xl text-white bg-gradient-to-r from-pink-500 to-violet-500 hover:from-pink-600 hover:to-violet-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 transition-all shadow-md hover:shadow-lg disabled:opacity-70"
-                            >
-                                {isLoading ? (
-                                    <span className="flex items-center gap-2">
-                                        <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-                                        Processing...
-                                    </span>
-                                ) : "Reset Password"}
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+        {/* Header */}
+        <div className="p-7 text-center border-b border-white/10 bg-gradient-to-r from-pink-500/10 to-blue-500/10">
+          <h2 className="text-2xl font-bold text-white">
+            Reset Password
+          </h2>
+          <p className="text-gray-400 text-sm mt-1">
+            Create a new secure password
+          </p>
         </div>
-    );
+
+        {/* Body */}
+        <div className="p-7 space-y-5">
+
+          {/* Errors */}
+          {errors.length > 0 && (
+            <div className="bg-red-500/10 border border-red-500/30 text-red-300 p-3 rounded-xl text-sm">
+              {errors.map((e, i) => (
+                <p key={i}>• {e}</p>
+              ))}
+            </div>
+          )}
+
+          {/* Success */}
+          {message && (
+            <div className="bg-green-500/10 border border-green-500/30 text-green-300 p-3 rounded-xl text-sm">
+              {message}
+            </div>
+          )}
+
+          <form onSubmit={handleResetPassword} className="space-y-4">
+
+            {/* Password */}
+            <div>
+              <label className="text-xs text-gray-400 mb-2 block">
+                New Password
+              </label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••"
+                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white
+                focus:outline-none focus:border-pink-500/50 focus:ring-2 focus:ring-pink-500/20"
+              />
+            </div>
+
+            {/* Confirm Password */}
+            <div>
+              <label className="text-xs text-gray-400 mb-2 block">
+                Confirm Password
+              </label>
+              <input
+                type="password"
+                value={passwordConfirmation}
+                onChange={(e) => setPasswordConfirmation(e.target.value)}
+                placeholder="••••••••"
+                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white
+                focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20"
+              />
+            </div>
+
+            {/* Button */}
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="w-full py-3 rounded-xl font-semibold text-white
+              bg-gradient-to-r from-pink-500 to-blue-500
+              hover:opacity-90 transition-all shadow-lg shadow-pink-500/20"
+            >
+              {isLoading ? "Processing..." : "Reset Password"}
+            </button>
+
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+);
 }
 
 export default function ResetPasswordPage() {

@@ -5,6 +5,8 @@ import { SiteSettingsProvider } from '@/context/SiteSettingsContext'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import FloatingAppInstall from '@/components/ui/FloatingAppInstall'
+import LiveOrderPopup from "@/components/LiveOrderPopup";
+
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
@@ -59,16 +61,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} font-sans min-h-screen flex flex-col pt-16`}>
+      <body className={`${inter.variable} font-sans min-h-screen flex flex-col pt-16 bg-gradient-to-b from-[#070c18] via-[#0b1224] to-[#05070d] text-white`}>
         <SiteSettingsProvider>
           <Header />
-            <main className="flex-grow w-full h-full relative z-0">
+            <main className="flex-grow w-full h-full relative z-0 ">
                 {children}
             </main>
           <Footer />
           <FloatingAppInstall />
+          <LiveOrderPopup />
         </SiteSettingsProvider>
       </body>
     </html>
   )
 }
+

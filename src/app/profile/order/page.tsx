@@ -42,120 +42,143 @@ export default function OrderPage() {
         fetchOrders();
     }, [user, currentPage]);
 
-    if (!user) return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+    if (!user) return <div className="min-h-screen flex items-center justify-center text-white bg-[#070b1a]">Loading...</div>;
 
     return (
-        <div className="container mx-auto px-4 py-8 md:py-12 max-w-5xl">
-            <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
-                <div className="bg-gray-50 px-6 py-5 border-b border-gray-100 flex items-center gap-3">
-                    <svg className="w-6 h-6 text-pink-500" viewBox="0 0 24 24">
-                        <path fill="currentColor" d="M11 15H17V17H11V15M9 7H7V9H9V7M11 13H17V11H11V13M11 9H17V7H11V9M9 11H7V13H9V11M21 5V19C21 20.1 20.1 21 19 21H5C3.9 21 3 20.1 3 19V5C3 3.9 3.9 3 5 3H19C20.1 3 21 3.9 21 5M19 5H5V19H19V5M9 15H7V17H9V15Z"></path>
-                    </svg>
-                    <h2 className="text-xl font-bold text-gray-800">My Orders</h2>
+        <div className="min-h-screen bg-gradient-to-br from-[#070b1a] via-[#0b1228] to-[#050816] text-white">
+            <div className="container mx-auto px-4 py-10 max-w-5xl">
+
+                {/* HEADER */}
+                <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 mb-8">
+                    <div className="absolute inset-0 bg-gradient-to-r from-pink-500/10 to-purple-500/10"></div>
+
+                    <div className="flex items-center gap-3 relative z-10">
+                        <h2 className="text-xl font-bold text-white">My Orders</h2>
+                    </div>
                 </div>
 
-                <div className="p-6">
-                    {loading ? (
-                        <div className="text-center py-10 text-gray-500">Loading orders...</div>
-                    ) : error ? (
-                        <div className="text-center py-10 text-red-500">{error}</div>
-                    ) : Object.keys(orders).length > 0 ? (
-                        <div className="space-y-4">
-                            {Object.values(orders).map((order: any) => {
-                                let dataFields: any = {};
-                                try { dataFields = JSON.parse(order.data); } catch { }
+                {/* CONTENT */}
+                <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl overflow-hidden">
 
-                                const isCompleted = order.status === "COMPLETED";
-                                const isRejected = order.status === "Rejected";
+                    <div className="p-6">
 
-                                return (
-                                    <div key={order.id} className="border border-gray-200 rounded-2xl p-5 hover:shadow-md transition-shadow bg-white">
-                                        <div className="flex flex-col md:flex-row justify-between md:items-center gap-4 border-b border-gray-100 pb-4 mb-4">
-                                            <div className="flex flex-col gap-1">
-                                                <div className="flex items-center gap-2">
-                                                    <span className="text-xl font-bold bg-gray-100 text-gray-600 ">Order ID: #{order.order_id || order.id}</span>
-                                                </div>
+                        {loading ? (
+                            <div className="text-center py-20 text-gray-300">Loading orders...</div>
+                        ) : error ? (
+                            <div className="text-center py-10 text-red-400">{error}</div>
+                        ) : Object.keys(orders).length > 0 ? (
+
+                            <div className="space-y-4">
+
+                                {Object.values(orders).map((order: any) => {
+
+                                    let dataFields: any = {};
+                                    try { dataFields = JSON.parse(order.data); } catch { }
+
+                                    const isCompleted = order.status === "COMPLETED";
+                                    const isRejected = order.status === "Rejected";
+
+                                    return (
+                                        <div key={order.id}
+                                            className="rounded-2xl border border-white/10 bg-white/5 p-5 hover:bg-white/10 transition-all">
+
+                                            {/* TOP */}
+                                            <div className="flex flex-col md:flex-row justify-between gap-4 border-b border-white/10 pb-4 mb-4">
+
                                                 <div>
-                                                    <p className="text-[10px] text-gray-500 uppercase tracking-tighter">Transaction ID</p>
-                                                    <p className="font-mono font-bold text-gray-700 text-sm">{order.trx_id}</p>
+                                                    <p className="text-xs text-gray-400">Order ID</p>
+                                                    <p className="font-bold text-white">
+                                                        #{order.order_id || order.id}
+                                                    </p>
+
+                                                    <p className="text-xs text-gray-400 mt-2">Transaction</p>
+                                                    <p className="font-mono text-sm text-gray-200">
+                                                        {order.trx_id}
+                                                    </p>
+                                                </div>
+
+                                                <div className="text-left md:text-right">
+                                                    <p className="text-xs text-gray-400">Amount</p>
+                                                    <p className="text-xl font-bold text-pink-400">
+                                                        ৳ {order.amount_paid}
+                                                    </p>
                                                 </div>
                                             </div>
-                                            <div className="text-left md:text-right">
-                                                <p className="text-sm text-gray-500">Amount Paid</p>
-                                                <p className="font-bold text-xl text-pink-600">৳ {order.amount_paid}</p>
-                                            </div>
-                                        </div>
 
-                                        <div className="grid md:grid-cols-2 gap-6">
-                                            <div className="space-y-2 text-sm text-gray-600">
-                                                <p><span className="font-medium text-gray-800">Date:</span> {new Date(order.created_at).toLocaleString()}</p>
-                                                <p><span className="font-medium text-gray-800">Package:</span> {dataFields?.selectedRechargeType || 'N/A'}</p>
-                                                {dataFields?.accountInfo && Object.entries(dataFields.accountInfo).map(([key, value]) => (
-                                                    <p key={key}><span className="font-medium text-gray-800">{key.replace(/_/g, " ")}:</span> {value as string}</p>
-                                                ))}
-                                            </div>
+                                            {/* BODY */}
+                                            <div className="grid md:grid-cols-2 gap-6 text-sm text-gray-300">
 
-                                            <div className="space-y-2 text-sm md:text-right">
-                                                <div className="inline-flex flex-col md:items-end">
-                                                    <span className="font-medium text-gray-500 mb-1">Status</span>
-                                                    <span className={`px-4 py-1.5 rounded-full font-bold text-sm inline-block ${ 
-                                                        isCompleted ? 'bg-green-100 text-green-700' : 
-                                                        isRejected ? 'bg-red-100 text-red-700' : 'bg-yellow-100 text-yellow-700' 
-                                                    }`}>
-                                                        {order.status}
-                                                    </span>
+                                                <div className="space-y-2">
+                                                    <p><span className="text-gray-400">Date:</span> {new Date(order.created_at).toLocaleString()}</p>
+                                                    <p><span className="text-gray-400">Package:</span> {dataFields?.selectedRechargeType || "N/A"}</p>
                                                 </div>
-                                                
-                                                {isCompleted && (
-                                                    <p className="text-xs text-green-600 mt-2">Completed on: {new Date(order.updated_at).toLocaleString()}</p>
-                                                )}
-                                                {isRejected && order.reject_reason && (
-                                                    <div className="mt-2 p-3 bg-red-50 rounded-lg text-red-600 text-left md:text-right text-xs">
-                                                        <span className="font-bold">Reason:</span> {order.reject_reason}
+
+                                                <div className="md:text-right space-y-2">
+
+                                                    <div>
+                                                        <span className="text-gray-400 mr-3 text-xs">Status</span>
+                                                        <div className={`inline-block mt-1 px-4 py-1 rounded-full text-xs font-bold
+                                                            ${isCompleted ? 'bg-green-500/20 text-green-400 border border-green-500/30' :
+                                                                isRejected ? 'bg-red-500/20 text-red-400 border border-red-500/30' :
+                                                                    'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30'}
+                                                        `}>
+                                                            {order.status}
+                                                        </div>
                                                     </div>
-                                                )}
+
+                                                    {isRejected && order.reject_reason && (
+                                                        <p className="text-xs text-red-300 mt-2">
+                                                            {order.reject_reason}
+                                                        </p>
+                                                    )}
+
+                                                    {isCompleted && (
+                                                        <p className="text-xs text-green-300 mt-2">
+                                                            Completed: {new Date(order.updated_at).toLocaleString()}
+                                                        </p>
+                                                    )}
+                                                </div>
+
                                             </div>
                                         </div>
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    ) : (
-                        <div className="text-center py-12">
-                            <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <span className="text-3xl text-gray-400">📦</span>
+                                    );
+                                })}
+
                             </div>
-                            <h4 className="text-lg font-bold text-gray-800 mb-2">No orders found!</h4>
-                            <p className="text-gray-500 mb-6">Looks like you haven't made any top-up orders yet.</p>
-                            <Link href="/topup" className="bg-gradient-to-r from-pink-500 to-red-500 text-white font-bold py-3 px-8 rounded-full shadow-md hover:shadow-lg transition-transform hover:-translate-y-0.5 inline-block">
-                                Order Now
-                            </Link>
-                        </div>
-                    )}
+
+                        ) : (
+                            <div className="text-center py-20 text-gray-400">
+                                No orders found
+                            </div>
+                        )}
+
+                    </div>
+
                 </div>
 
-                {/* Pagination */}
+                {/* PAGINATION */}
                 {totalPages > 1 && (
-                    <div className="bg-gray-50 p-4 border-t border-gray-100 flex justify-center items-center gap-4">
+                    <div className="flex justify-center items-center gap-4 mt-6 text-white">
                         <button
-                            onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-                            disabled={currentPage === 1}
-                            className="w-10 h-10 rounded-full flex items-center justify-center bg-white border border-gray-200 text-gray-600 hover:bg-pink-50 hover:text-pink-600 disabled:opacity-50 disabled:hover:bg-white disabled:hover:text-gray-600 transition-colors"
+                            onClick={() => setCurrentPage(p => Math.max(p - 1, 1))}
+                            className="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20"
                         >
-                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
+                            Prev
                         </button>
-                        <span className="font-medium text-gray-700">
-                            Page <span className="font-bold text-pink-600">{currentPage}</span> of {totalPages}
+
+                        <span className="text-sm text-gray-300">
+                            Page {currentPage} / {totalPages}
                         </span>
+
                         <button
-                            onClick={() => setCurrentPage(prev => prev < totalPages ? prev + 1 : prev)}
-                            disabled={currentPage === totalPages}
-                            className="w-10 h-10 rounded-full flex items-center justify-center bg-white border border-gray-200 text-gray-600 hover:bg-pink-50 hover:text-pink-600 disabled:opacity-50 disabled:hover:bg-white disabled:hover:text-gray-600 transition-colors"
+                            onClick={() => setCurrentPage(p => Math.min(p + 1, totalPages))}
+                            className="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20"
                         >
-                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+                            Next
                         </button>
                     </div>
                 )}
+
             </div>
         </div>
     );

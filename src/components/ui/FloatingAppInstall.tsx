@@ -90,32 +90,54 @@ export default function FloatingAppInstall() {
     <AnimatePresence>
       {(showInstall || deferredPrompt) && !isDismissed && (
         <motion.div
-          initial={{ opacity: 0, y: 100 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 100 }}
-          transition={{ type: "spring", damping: 25, stiffness: 200 }}
-          className="fixed bottom-[74px] left-2 right-2 z-[9999] md:bottom-24 md:left-auto md:right-6 md:w-[380px]"
+          initial={{ opacity: 0, y: 80, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: 80, scale: 0.95 }}
+          transition={{ type: 'spring', damping: 22, stiffness: 180 }}
+          className="fixed bottom-20 left-2 right-2 z-[9999] md:left-auto md:right-6 md:w-[380px]"
         >
-          <div className="bg-[#000180] rounded-xl p-3 shadow-2xl flex items-center justify-between gap-3 border border-white/5">
-            <div className="flex items-center gap-3 pl-1">
-              <FaDownload className="text-white text-lg" />
-              <span className="text-white text-sm font-bold tracking-wide">Install App</span>
-            </div>
-            
-            <div className="flex items-center gap-3">
-              <button
-                onClick={handleInstallClick}
-                className="bg-[#eef2ff] hover:bg-white text-[#000180] font-bold py-1.5 px-4 rounded-lg text-xs transition-all active:scale-95 shadow-sm"
-              >
-                Install
-              </button>
-              <button 
-                onClick={handleDismiss}
-                className="text-white/70 hover:text-white transition-colors p-1"
-                aria-label="Close"
-              >
-                <IoClose size={22} />
-              </button>
+          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-[#0f172a] via-[#111827] to-[#0b1224] shadow-2xl backdrop-blur-xl">
+
+            {/* glow */}
+            <div className="absolute -top-10 -right-10 w-32 h-32 bg-blue-500/20 blur-3xl rounded-full"></div>
+            <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-purple-500/20 blur-3xl rounded-full"></div>
+
+            <div className="relative flex items-center justify-between p-4">
+
+              {/* left */}
+              <div className="flex items-center gap-3">
+                <div className="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
+                  <FaDownload className="text-white text-sm" />
+                </div>
+
+                <div>
+                  <p className="text-white font-semibold text-sm">
+                    Install App
+                  </p>
+                  <p className="text-gray-400 text-xs">
+                    Faster experience & offline access
+                  </p>
+                </div>
+              </div>
+
+              {/* right buttons */}
+              <div className="flex items-center gap-2">
+
+                <button
+                  onClick={handleInstallClick}
+                  className="px-4 py-2 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 text-white text-xs font-bold shadow-lg hover:opacity-90 active:scale-95 transition"
+                >
+                  Install
+                </button>
+
+                <button
+                  onClick={handleDismiss}
+                  className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 text-gray-300 hover:text-white hover:bg-white/10 transition flex items-center justify-center"
+                >
+                  <IoClose size={18} />
+                </button>
+
+              </div>
             </div>
           </div>
         </motion.div>

@@ -13,74 +13,74 @@ export default function FAQPage() {
       items: [
         {
           q: "How to top-up Free Fire diamonds?",
-          a: "Enter your Free Fire Player ID, select your desired diamond package, and complete the payment."
+          a: "Enter your Free Fire Player ID, select your desired diamond package, and complete the payment.",
         },
         {
           q: "Do I need to log in to my Free Fire account?",
-          a: "No. শুধুমাত্র Player ID দিলেই হবে। কখনোই আপনার password শেয়ার করবেন না।"
+          a: "No. Only Player ID is required. Never share your password.",
         },
         {
           q: "Is this website safe?",
-          a: "Yes, we are a trusted third-party top-up service. Your account remains completely safe."
-        }
-      ]
+          a: "Yes, we are a trusted top-up service with secure transactions.",
+        },
+      ],
     },
     {
       category: "Payment",
       items: [
         {
           q: "What payment methods are available?",
-          a: "We support bKash, Nagad, Rocket, and other local payment methods."
+          a: "We support bKash, Nagad, Rocket and other local methods.",
         },
         {
-          q: "Payment successful but diamonds not received?",
-          a: "Usually delivery instant হয়। 5–10 মিনিট অপেক্ষা করুন। তারপরও না পেলে support-এ যোগাযোগ করুন।"
+          q: "Payment successful but not received?",
+          a: "Wait 5–10 minutes. If still not received, contact support.",
         },
         {
           q: "Can I cancel my order?",
-          a: "Payment complete হওয়ার পর order cancel করা সম্ভব না।"
-        }
-      ]
+          a: "Once payment is completed, cancellation is not possible.",
+        },
+      ],
     },
     {
       category: "Delivery",
       items: [
         {
-          q: "How long does it take to receive diamonds?",
-          a: "Most orders are delivered instantly. কখনো কখনো 10–15 মিনিট সময় লাগতে পারে।"
+          q: "How long does delivery take?",
+          a: "Most orders are instant. Sometimes it may take up to 10–15 minutes.",
         },
         {
           q: "Why is my order delayed?",
-          a: "Server issue বা payment verification এর কারণে delay হতে পারে।"
-        }
-      ]
+          a: "Delay may occur due to server or verification issues.",
+        },
+      ],
     },
     {
       category: "Security",
       items: [
         {
           q: "Is my account safe?",
-          a: "Yes. আমরা কখনো password বা login info চাই না। শুধুমাত্র Player ID লাগে।"
+          a: "Yes. We never ask for password or login details.",
         },
         {
           q: "Do you store my data?",
-          a: "We only store necessary order information for support purposes."
-        }
-      ]
+          a: "Only necessary order info is stored for support.",
+        },
+      ],
     },
     {
       category: "Refund",
-items: [
-  {
-    q: "❓ Can I get a refund?",
-    a: "Refund is only applicable if the diamond delivery fails or the order cannot be processed successfully. In such cases, the refund will be credited to your wallet balance for future use on our platform. We do not provide cash refunds."
-  },
-  {
-    q: "How long does refund take?",
-    a: "Refunds are usually processed within 1–2 working hours after verification of the issue. In rare cases, it may take longer depending on system or payment status."
-  }
-]
-    }
+      items: [
+        {
+          q: "Can I get a refund?",
+          a: "Refund only applies if delivery fails. It will be credited to wallet balance.",
+        },
+        {
+          q: "How long does refund take?",
+          a: "Usually 1–2 hours after verification.",
+        },
+      ],
+    },
   ];
 
   const filteredFaqs = faqs.map((section) => ({
@@ -89,92 +89,107 @@ items: [
       (item) =>
         item.q.toLowerCase().includes(search.toLowerCase()) ||
         item.a.toLowerCase().includes(search.toLowerCase())
-    )
+    ),
   }));
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-12">
+    <div className="max-w-5xl mx-auto px-4 py-12 text-white">
 
-      {/* 🔥 Header */}
-      <div className="text-center mb-10">
-        <h1 className="text-4xl font-bold mb-3">
+      {/* HEADER */}
+      <div className="text-center mb-12">
+        <h1 className="text-4xl md:text-5xl font-bold">
           Frequently Asked Questions
         </h1>
-        <p className="text-gray-500">
-          Free Fire diamond top-up related common questions & answers
+
+        <p className="text-slate-400 mt-3">
+          Everything you need to know about top-up service
         </p>
       </div>
 
-      {/* 🔍 Search */}
+      {/* SEARCH */}
       <div className="mb-10">
         <input
           type="text"
           placeholder="Search your question..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-500"
+          className="w-full bg-slate-900 border border-slate-800 text-white placeholder-slate-500 rounded-xl px-4 py-3
+          focus:outline-none focus:ring-2 focus:ring-orange-500/40 focus:border-orange-500"
         />
       </div>
 
-      {/* 📚 FAQ Sections */}
+      {/* FAQ */}
       {filteredFaqs.map((section, sectionIndex) => (
         <div key={sectionIndex} className="mb-10">
 
-          <h2 className="text-2xl font-semibold mb-4 text-red-500">
+          {/* CATEGORY */}
+          <h2 className="text-xl font-semibold mb-5 text-orange-400">
             {section.category}
           </h2>
 
           <div className="space-y-3">
+
             {section.items.map((item, index) => {
               const currentIndex = `${sectionIndex}-${index}`;
+              const isOpen = openIndex === currentIndex;
 
               return (
                 <div
                   key={index}
-                  className="border rounded-lg overflow-hidden shadow-sm"
+                  className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-md"
                 >
+
+                  {/* QUESTION */}
                   <button
                     onClick={() =>
-                      setOpenIndex(openIndex === currentIndex ? null : currentIndex)
+                      setOpenIndex(isOpen ? null : currentIndex)
                     }
-                    className="w-full text-left px-5 py-4 flex justify-between items-center font-medium hover:bg-gray-50 transition"
+                    className="w-full flex justify-between items-center px-5 py-4 text-left hover:bg-slate-800 transition"
                   >
-                    <span>{item.q}</span>
-                    <span className="text-red-500">
-                      {openIndex === currentIndex ? <FaMinus /> : <FaPlus />}
+                    <span className="font-medium text-white">
+                      {item.q}
+                    </span>
+
+                    <span className="text-orange-400 text-sm">
+                      {isOpen ? <FaMinus /> : <FaPlus />}
                     </span>
                   </button>
 
-                  {openIndex === currentIndex && (
-                    <div className="px-5 pb-4 text-gray-600 border-t leading-relaxed">
+                  {/* ANSWER */}
+                  {isOpen && (
+                    <div className="px-5 pb-4 text-slate-400 border-t border-slate-800 leading-relaxed">
                       {item.a}
                     </div>
                   )}
+
                 </div>
               );
             })}
-          </div>
 
+          </div>
         </div>
       ))}
 
-      {/* 💬 Support Section */}
-      <div className="mt-16 text-center bg-gray-50 p-8 rounded-xl">
+      {/* SUPPORT */}
+      <div className="mt-16 text-center bg-slate-900 border border-slate-800 p-8 rounded-2xl shadow-lg">
+
         <h3 className="text-2xl font-semibold mb-2">
           Still need help?
         </h3>
-        <p className="text-gray-500 mb-5">
-          আমাদের support team 24/7 available আছে
+
+        <p className="text-slate-400 mb-5">
+          Our support team is available 24/7
         </p>
 
         <a
           href="https://wa.me/8801317956376"
           target="_blank"
-          className="inline-flex items-center gap-2 bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition"
+          className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-xl font-medium shadow-lg transition"
         >
           <FaWhatsapp />
           Contact Support
         </a>
+
       </div>
 
     </div>
