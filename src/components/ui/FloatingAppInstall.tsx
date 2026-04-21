@@ -115,7 +115,7 @@ export default function FloatingAppInstall() {
                     Install App
                   </p>
                   <p className="text-gray-400 text-xs">
-                    Faster experience & offline access
+                    Try Our Mobile App
                   </p>
                 </div>
               </div>
