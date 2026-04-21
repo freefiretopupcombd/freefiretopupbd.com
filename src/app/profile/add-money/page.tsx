@@ -16,6 +16,8 @@ export default function ProfileAddMoneyPage() {
     const [transactionId, setTransactionId] = useState('');
     const router = useRouter();
     const siteSettings = useSiteSettings();
+    const [successModal, setSuccessModal] = useState(false);
+const [successMessage, setSuccessMessage] = useState("");
 
     useEffect(() => {
         const storedUser = localStorage.getItem('user-info');
@@ -88,9 +90,9 @@ export default function ProfileAddMoneyPage() {
 
             const data = await response.json();
             if (response.ok && data.status === "success") {
-                alert("Top-up request submitted! Please wait for admin verification.");
-                router.push('/profile/order');
-            } else {
+                setSuccessMessage("Top-up request submitted! Please wait for admin verification.");
+                setSuccessModal(true);
+       } else {
                 setError(data.message || 'Submission failed');
             }
         } catch (err: any) {
@@ -318,6 +320,35 @@ export default function ProfileAddMoneyPage() {
                 </div>
             </div>
         )}
+
+
+        {successModal && (
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
+
+    <div className="bg-white w-[90%] max-w-md p-6 rounded-2xl shadow-xl text-center">
+
+      <div className="text-green-500 text-5xl">✔</div>
+
+      <h2 className="text-xl font-bold mt-3 text-gray-800">
+        Success!
+      </h2>
+
+      <p className="text-gray-600 mt-2">
+        {successMessage}
+      </p>
+
+      <button
+        onClick={() => router.push("/profile/order")}
+        className="mt-5 w-full bg-pink-500 hover:bg-pink-600 text-white py-2 rounded-lg font-semibold"
+      >
+        Go to Orders
+      </button>
+
+    </div>
+
+  </div>
+)}
+
     </div>
 );
 }

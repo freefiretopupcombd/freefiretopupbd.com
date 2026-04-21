@@ -467,6 +467,10 @@ useEffect(() => {
   </div>
 
   {/* WALLET */}
+
+
+
+  
   {user && (
     <div className="px-4 pb-4">
       <div className="bg-slate-800 border border-slate-700 rounded-xl p-3 flex items-center justify-between shadow-inner">
