@@ -101,7 +101,7 @@ export default async function HomePage({ searchParams }: { searchParams: { page?
             <HomePageModal initialData={settings?.notice_popup} />
             <NoticeBanner notice={settings?.notice} />
 
-            <div className="container mx-auto px-6">
+            <div className="container mx-auto">
                 {settings?.banner_images && <HomeCarousel banners={settings.banner_images} />}
 
                 {/* Mobile Games */}
