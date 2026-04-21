@@ -13,20 +13,6 @@ export default function Header() {
     const [isSidebarVisible, setIsSidebarVisible] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const router = useRouter();
-    
-
-
-    const storedUser = localStorage.getItem('user-info');
-    const [userData, setUserData] = useState<any>(null);
-
-    useEffect(() => {
-    if (storedUser) {
-    setUserData(JSON.parse(storedUser));
-        }
-    }, []);
-
-    const balance = userData?.available_balance ?? 0;
-
 
     useEffect(() => {
         setIsMobile(window.innerWidth <= 767);
@@ -148,24 +134,24 @@ export default function Header() {
   hover:bg-white/10 transition"
 >
 
+  {/* BALANCE (LEFT SIDE) */}
   <div className="px-2 py-1 rounded-full bg-gradient-to-r from-yellow-400/20 to-orange-500/20 border border-yellow-400/30">
-  <span className="text-xs text-yellow-300 font-medium">
-    ৳ {balance}
-  </span>
-</div>
+    <span className="text-xs text-yellow-300 font-medium">
+      ৳ {user?.balance ?? 0}
+    </span>
+  </div>
 
   {/* AVATAR */}
   <div className="relative">
     <img
-  src={
-    user?.photoURL ||
-    user?.picture ||
-    user?.avatar ||
-    "/src_assets/img/default.png"
-  }
-  className="w-9 h-9 rounded-full border border-white/10 object-cover"
-  alt="profile"
-/>
+      src={
+        user?.photoURL
+          ? user.photoURL
+          : "/src_assets/img/default.png"
+      }
+      className="w-9 h-9 rounded-full border border-white/10 object-cover"
+      alt="profile"
+    />
 
     {/* online dot */}
     <span className="absolute -bottom-1 -right-1 w-3 h-3 bg-green-500 border border-[#0b1224] rounded-full"></span>
