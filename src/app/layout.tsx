@@ -7,9 +7,7 @@ import Footer from '@/components/layout/Footer'
 import FloatingAppInstall from '@/components/ui/FloatingAppInstall'
 import LiveOrderPopup from "@/components/LiveOrderPopup";
 
-
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
-
 
 export const viewport: Viewport = {
   themeColor: '#ec1a57',
@@ -61,12 +59,29 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        {/* ✅ Structured Data for Google Site Name */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "Free Fire Top Up BD",
+              url: "https://www.freefiretopupbd.com/"
+            })
+          }}
+        />
+      </head>
+
       <body className={`${inter.variable} font-sans min-h-screen flex flex-col pt-16 bg-gradient-to-b from-[#070c18] via-[#0b1224] to-[#05070d] text-white`}>
         <SiteSettingsProvider>
           <Header />
-            <main className="flex-grow w-full h-full relative z-0 ">
-                {children}
-            </main>
+          
+          <main className="flex-grow w-full h-full relative z-0">
+            {children}
+          </main>
+
           <Footer />
           <FloatingAppInstall />
           <LiveOrderPopup />
@@ -75,4 +90,3 @@ export default function RootLayout({
     </html>
   )
 }
-
