@@ -13,6 +13,26 @@ export default function Header() {
     const [isSidebarVisible, setIsSidebarVisible] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const router = useRouter();
+    const [userData, setUserData] = useState<any>(null);
+
+    useEffect(() => {
+  const fetchUserProfile = async () => {
+    if (!user?.id) return;
+
+    try {
+      const res = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/user-profile/${user.id}`
+      );
+
+      setUserData(res.data);
+
+    } catch (err) {
+      console.error("Header balance fetch error:", err);
+    }
+  };
+
+  fetchUserProfile();
+}, [user]);
 
     useEffect(() => {
         setIsMobile(window.innerWidth <= 767);
@@ -134,12 +154,11 @@ export default function Header() {
   hover:bg-white/10 transition"
 >
 
-  {/* BALANCE (LEFT SIDE) */}
   <div className="px-2 py-1 rounded-full bg-gradient-to-r from-yellow-400/20 to-orange-500/20 border border-yellow-400/30">
-    <span className="text-xs text-yellow-300 font-medium">
-      ৳ {user?.balance ?? 0}
-    </span>
-  </div>
+  <span className="text-xs text-yellow-300 font-medium">
+    ৳ {userData?.available_balance ?? "..."}
+  </span>
+</div>
 
   {/* AVATAR */}
   <div className="relative">
