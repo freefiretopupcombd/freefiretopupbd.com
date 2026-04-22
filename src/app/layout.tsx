@@ -67,7 +67,7 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebSite",
-              name: "Free Fire Top Up BD",
+              name: "FreeFire TopUp BD",
               url: "https://www.freefiretopupbd.com/"
             })
           }}
