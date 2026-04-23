@@ -112,22 +112,52 @@ export default function Footer() {
   {/* FLOATING SUPPORT */}
   <div className="fixed bottom-20 md:bottom-6 right-4 z-50 flex items-center gap-2">
 
-    {isSupportOpen && (
+    {/* ================= PREMIUM FLOATING SUPPORT ================= */}
+<div className="fixed bottom-20 md:bottom-6 right-4 z-50 flex flex-col items-end gap-3">
+
+  {/* Action Buttons */}
+  {isSupportOpen && (
+    <div className="flex flex-col gap-2 animate-in slide-in-from-bottom-2 duration-300">
+
+      {/* WhatsApp */}
       <a
         href={`https://wa.me/${contact_info.whatsapp_number}`}
         target="_blank"
-        className="w-12 h-12 flex items-center justify-center rounded-full bg-green-500 text-white shadow-lg hover:bg-green-600 transition"
+        className="flex items-center gap-2 px-4 py-2 rounded-full bg-green-500 text-white shadow-lg hover:scale-105 transition"
       >
-        <FaWhatsapp size={22} />
+        <FaWhatsapp size={18} />
+        WhatsApp
       </a>
-    )}
 
-    <button
-      onClick={() => setIsSupportOpen(!isSupportOpen)}
-      className="px-4 py-3 rounded-full bg-gradient-to-r from-pink-500 to-red-500 text-white font-medium shadow-lg hover:scale-105 transition"
-    >
-      {isSupportOpen ? "Close" : "Support!"}
-    </button>
+
+      {/* Call */}
+      <a
+        href={`tel:${contact_info.phone_number}`}
+        className="flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500 text-white shadow-lg hover:scale-105 transition"
+      >
+        <span className="text-sm">📞</span>
+        Call Now
+      </a>
+
+    </div>
+  )}
+
+  {/* MAIN TOGGLE BUTTON */}
+  <button
+    onClick={() => setIsSupportOpen(!isSupportOpen)}
+    className="relative px-5 py-3 rounded-full bg-gradient-to-r from-pink-500 via-red-500 to-orange-500 text-white font-semibold shadow-xl hover:scale-105 transition-all duration-300 flex items-center gap-2"
+  >
+
+    {/* Pulse effect */}
+    <span className="absolute inset-0 rounded-full bg-white/10 animate-ping"></span>
+
+    <span className="relative">
+      {isSupportOpen ? "✖ Close" : "💬 Support"}
+    </span>
+
+  </button>
+
+</div>
 
   </div>
 

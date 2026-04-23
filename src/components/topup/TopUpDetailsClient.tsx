@@ -5,6 +5,7 @@ import PaymentMethods from './PaymentMethods';
 import ManualPaymentForm from './ManualPaymentForm';
 import axios from "axios";
 import SecureBadge from "../SecureBadge";
+import SecureBadgeHeader from "../SecureBadgeHeader";
 
 
 export default function TopUpDetailsClient({ product }: { product: any }) {
@@ -14,6 +15,7 @@ export default function TopUpDetailsClient({ product }: { product: any }) {
     const [error, setError] = useState<string | null>(null);
     const [errorRecharge, setErrorRecharge] = useState<string | null>(null);
     const [errorPlayerID, setErrorPlayerID] = useState<string | null>(null);
+    const errorRef = useRef<HTMLDivElement>(null);
 
     const [quantity, setQuantity] = useState(1);
     const [selectedRechargeIndex, setSelectedRechargeIndex] = useState<number | null>(null);
@@ -22,6 +24,7 @@ export default function TopUpDetailsClient({ product }: { product: any }) {
 
     const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<string | null>(null);
     const [accountInfo, setAccountInfo] = useState<Record<string, string>>({});
+    
     const [wallet, setWallet] = useState<any>(null);
 
     // Manual Payment State
@@ -31,6 +34,10 @@ export default function TopUpDetailsClient({ product }: { product: any }) {
 
     const [successModal, setSuccessModal] = useState(false);
     const [successMessage, setSuccessMessage] = useState("");
+
+
+    
+  
 
 
 // Auto select first manual payment method when manual payment is shown
@@ -127,28 +134,60 @@ useEffect(() => {
     };
 
     const validateSubmission = () => {
-        setError(null); setErrorRecharge(null); setErrorPlayerID(null);
-        if (!user) {
-            router.push('/login');
+    setError(null);
+    setErrorRecharge(null);
+    setErrorPlayerID(null);
+
+    if (!user) {
+        router.push('/login');
+        return false;
+    }
+
+    if (!selectedRechargeType) {
+        setErrorRecharge("Recharge type is required");
+
+        setTimeout(() => {
+            errorRef.current?.scrollIntoView({
+                behavior: "smooth",
+                block: "center",
+            });
+        }, 50);
+
+        return false;
+    }
+
+    if (!isQuantitySelectionAllowed) {
+        const hasValidAccountInfo = Object.values(accountInfo).some(val => val && val.trim() !== "");
+
+        if (!hasValidAccountInfo) {
+            setErrorPlayerID("Account Info / Player ID is required");
+
+            setTimeout(() => {
+                errorRef.current?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center",
+                });
+            }, 50);
+
             return false;
         }
-        if (!selectedRechargeType) {
-            setErrorRecharge("Recharge type is required");
-            return false;
-        }
-        if (!isQuantitySelectionAllowed) {
-            const hasValidAccountInfo = Object.values(accountInfo).some(val => val && val.trim() !== "");
-            if (!hasValidAccountInfo) {
-                setErrorPlayerID("Account Info / Player ID is required");
-                return false;
-            }
-        }
-        if (!selectedPaymentMethod) {
-            setError("Please select a payment method.");
-            return false;
-        }
-        return true;
-    };
+    }
+
+    if (!selectedPaymentMethod) {
+        setError("Please select a payment method.");
+
+        setTimeout(() => {
+            errorRef.current?.scrollIntoView({
+                behavior: "smooth",
+                block: "center",
+            });
+        }, 50);
+
+        return false;
+    }
+
+    return true;
+};
 
     const handleBuyNow = async () => {
         if (!validateSubmission()) return;
@@ -269,8 +308,12 @@ useEffect(() => {
                 <div>
                     <h1 className="text-xl md:text-2xl font-semibold">{product.name}</h1>
                     <p className="text-gray-400 text-sm mt-1">Game Top-up</p>
+                    <div className="mt-2">
+                      
+                    </div>
                 </div>
             </div>
+            <SecureBadgeHeader />
 
             <div className="flex flex-col md:flex-row gap-6 mt-6">
                 {/* Left Column */}
@@ -286,10 +329,55 @@ useEffect(() => {
     <h2 className="text-lg font-semibold text-white tracking-wide">
       Select Recharge
     </h2>
+
+    
   </div>
+  
+  <a
+  href="https://youtu.be/Jhgh8O59D_M?si=iJlViiQk5h3t5_YJ"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="group relative flex items-center gap-3 
+  px-3 py-2 rounded-xl 
+  bg-gradient-to-r from-red-500/10 via-pink-500/10 to-orange-500/10
+  border border-red-500/20
+  hover:border-red-400/40
+  backdrop-blur-md
+  transition-all duration-300
+  hover:scale-[1.03] hover:shadow-lg hover:shadow-red-500/10"
+>
+
+  {/* Thumbnail */}
+  <div className="relative w-14 h-10 rounded-md overflow-hidden border border-slate-700">
+    <img
+      src="https://img.youtube.com/vi/YOUR_VIDEO_ID/mqdefault.jpg"
+      className="w-full h-full object-cover"
+    />
+
+    {/* Play overlay */}
+    <div className="absolute inset-0 flex items-center justify-center bg-black/40 group-hover:bg-black/20 transition">
+      <span className="text-white text-sm">▶</span>
+    </div>
+  </div>
+
+  {/* Text */}
+  <div className="leading-tight">
+    <p className="text-[11px] text-slate-400">
+      নতুন ইউজার?
+    </p>
+    <p className="text-xs md:text-sm text-white font-medium">
+      কিভাবে টপআপ করবেন দেখুন
+    </p>
+  </div>
+
+  {/* Glow effect */}
+  <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 bg-white/5 transition"></div>
+
+</a>
 
   {/* BODY */}
   <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-3">
+    
     {inputFieldsRecharge.map((field: any, index: number) => {
       const isSelected = selectedRechargeIndex === index;
       const isOutOfStock = field.recharge_stock === "0";
@@ -437,6 +525,28 @@ useEffect(() => {
     )}
   </div>
 </div>
+{/* ================= ERROR DISPLAY (GLOBAL) ================= */}
+<div ref={errorRef} className="space-y-2 mb-4">
+
+  {errorRecharge && (
+    <p className="text-red-400 text-sm font-medium bg-red-500/10 border border-red-500/20 p-2 rounded-lg">
+      {errorRecharge}
+    </p>
+  )}
+
+  {error && !showManualPayment && (
+    <p className="text-red-400 text-sm font-medium bg-red-500/10 border border-red-500/20 p-2 rounded-lg">
+      {error}
+    </p>
+  )}
+
+  {errorPlayerID && (
+    <p className="text-red-400 text-sm font-medium bg-red-500/10 border border-red-500/20 p-2 rounded-lg">
+      {errorPlayerID}
+    </p>
+  )}
+
+</div>
 <div
   ref={paymentSectionRef}
   className="bg-slate-900 border border-slate-800 rounded-2xl shadow-lg overflow-hidden"
@@ -497,26 +607,28 @@ useEffect(() => {
   {/* FOOTER / CTA */}
   <div className="p-4 border-t border-slate-700 bg-slate-900">
 
-    <button
-      onClick={handleBuyNow}
-      disabled={loading}
-      className="w-full bg-gradient-to-r from-pink-500 via-orange-500 to-red-500 
-      hover:from-pink-600 hover:to-red-600
-      text-white font-semibold py-3.5 px-6 rounded-xl 
-      shadow-lg shadow-orange-500/20 
-      transition-all duration-300 
-      disabled:opacity-60
-      flex items-center justify-center gap-2 text-base"
-    >
-      {loading ? (
-        <>
-          <span className="animate-spin h-5 w-5 border-2 border-white border-t-transparent rounded-full"></span>
-          Processing...
-        </>
-      ) : (
-        <>Buy Now • ৳ {totalAmount}</>
-      )}
-    </button>
+    {!showManualPayment && (
+  <button
+    onClick={handleBuyNow}
+    disabled={loading}
+    className="w-full bg-gradient-to-r from-pink-500 via-orange-500 to-red-500 
+    hover:from-pink-600 hover:to-red-600
+    text-white font-semibold py-3.5 px-6 rounded-xl 
+    shadow-lg shadow-orange-500/20 
+    transition-all duration-300 
+    disabled:opacity-60
+    flex items-center justify-center gap-2 text-base"
+  >
+    {loading ? (
+      <>
+        <span className="animate-spin h-5 w-5 border-2 border-white border-t-transparent rounded-full"></span>
+        Processing...
+      </>
+    ) : (
+      <>Buy Now • ৳ {totalAmount}</>
+    )}
+  </button>
+)}
 
     {/* Secure Badge */}
     <div className="mt-3 opacity-80">
@@ -601,6 +713,9 @@ useEffect(() => {
 
                 {/* Right Column */}
 <div className="md:w-1/3">
+
+
+
   <div className="bg-slate-900 border border-slate-800 rounded-2xl shadow-lg p-6 sticky top-24">
 
     {/* HEADER */}
@@ -608,6 +723,7 @@ useEffect(() => {
       <span className="text-orange-400 text-xl">📝</span>
       How to top up?
     </h3>
+    
 
     {/* CONTENT */}
     {product.description ? (
