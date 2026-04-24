@@ -20,6 +20,15 @@ export default function Footer() {
             <footer className="mt-auto mb-16 md:mb-0 text-slate-200 border-t border-slate-800 bg-slate-950">
 
   <section className="container mx-auto px-5 py-12">
+    {/* PAYMENT METHODS */}
+<div className="mt-1 mb-3 text-center">
+  
+  <div className="flex justify-center items-center md:flex-nowrap gap-2 mt-2">
+    
+    <img src="/payments/bkash.png" className="h-20" alt="bKash" />
+
+  </div>
+</div>
 
     <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
 

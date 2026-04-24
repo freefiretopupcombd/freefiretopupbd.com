@@ -8,14 +8,14 @@ export default function SecureBadge() {
   ];
 
   return (
-    <div className="flex flex-wrap md:flex-nowrap gap-2 mt-2">
+    <div className="flex justify-center items-center md:flex-nowrap gap-2 mt-2">
 
       {badges.map((badge, i) => (
         <div
           key={i}
           className="
           flex items-center gap-1.5
-          px-2.5 py-1
+          px-2.5 py-2
           text-[11px] md:text-xs
           text-slate-300
           bg-slate-800/60
