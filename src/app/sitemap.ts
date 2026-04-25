@@ -21,6 +21,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     process.env.NEXT_PUBLIC_SITE_URL || 'https://www.freefiretopupbd.com'
 
   const products = await fetchProducts()
+  console.log("PRODUCTS IN SITEMAP:", products) // debug
 
   const productUrls: MetadataRoute.Sitemap = products.map(
     (product: any) => ({
