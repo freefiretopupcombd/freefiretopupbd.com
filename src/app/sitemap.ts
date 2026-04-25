@@ -1,29 +1,35 @@
 import { MetadataRoute } from 'next'
 
-
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600 // 1 hour cache
 
 async function fetchProducts() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/all-products`, {
-    cache: 'no-store'
-  });
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/all-products`,
+      { next: { revalidate: 3600 } }
+    )
 
-  if (!res.ok) return [];
-  return res.json();
+    if (!res.ok) return []
+    return res.json()
+  } catch {
+    return []
+  }
 }
 
-
-
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.freefiretopupbd.com'
-  
-  const products = await fetchProducts();
-  const productUrls: MetadataRoute.Sitemap = products.map((product: any) => ({
-    url: `${baseUrl}/topup/${product.code}`,
-    lastModified: new Date(),
-    changeFrequency: 'daily',
-    priority: 0.8,
-  }));
+  const baseUrl =
+    process.env.NEXT_PUBLIC_SITE_URL || 'https://www.freefiretopupbd.com'
+
+  const products = await fetchProducts()
+
+  const productUrls: MetadataRoute.Sitemap = products.map(
+    (product: any) => ({
+      url: `${baseUrl}/topup/${product.slug || product.code}`,
+      lastModified: new Date(),
+      changeFrequency: 'daily',
+      priority: 0.8,
+    })
+  )
 
   return [
     {
@@ -44,7 +50,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly',
       priority: 0.7,
     },
-  
     ...productUrls,
   ]
 }
