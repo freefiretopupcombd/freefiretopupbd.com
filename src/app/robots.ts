@@ -1,7 +1,8 @@
 import { MetadataRoute } from 'next'
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.freefiretopupbd.com'
+  const baseUrl =
+    process.env.NEXT_PUBLIC_SITE_URL || 'https://www.freefiretopupbd.com'
 
   return {
     rules: {
@@ -9,9 +10,10 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: [
         '/profile/',
-        '/api',
+        '/api/',
         '/checkout/',
-        '/*?page=', // <-- Pagination URLs block
+        '/*?page=',
+        '/*&page=',
       ],
     },
     sitemap: `${baseUrl}/sitemap.xml`,
