@@ -10,11 +10,11 @@ const nextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: 'https://backend.freefiretopupbd.com/api/:path*',
+        destination: 'https://gpay.gammingbazaar.com/api/:path*',
       },
       {
         source: '/storage/:path*',
-        destination: 'https://backend.freefiretopupbd.com/storage/:path*',
+        destination: 'https://gpay.gammingbazaar.com/storage/:path*',
       },
     ];
   },

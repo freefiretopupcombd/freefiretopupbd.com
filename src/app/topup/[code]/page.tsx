@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation';
 
 async function fetchProductDetails(code: string) {
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://backend.freefiretopupbd.com';
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://gpay.gammingbazaar.com';
     const res = await fetch(`${apiUrl}/api/topup-detail/${code}`, {
       next: { revalidate: 60 },
       headers: {

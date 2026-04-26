@@ -12,7 +12,7 @@ export default function robots(): MetadataRoute.Robots {
         '/profile/',
         '/api/',
         '/checkout/',
-        '/backend/',
+        '/gpay/',
         '/*?page=',
         '/*&page=',
       ],
