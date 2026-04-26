@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 
 async function fetchSiteSettings() {
     try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://gpay.gammingbazaar.com';
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://backend.freefiretopupbd.com';
         const res = await fetch(`${apiUrl}/api/frontend-settings`, {
             next: { revalidate: 60 },
             headers: {
@@ -41,7 +41,7 @@ async function fetchSiteSettings() {
 
 async function fetchProducts(page: number) {
     try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://gpay.gammingbazaar.com';
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://backend.freefiretopupbd.com';
         const res = await fetch(`${apiUrl}/api?page=${page}`, {
             next: { revalidate: 60 },
             headers: {
@@ -61,7 +61,7 @@ async function fetchProducts(page: number) {
 // 🔥 IMPORTANT: no-store (live data)
 async function fetchRecentOrders() {
     try {
-        const res = await fetch('https://gpay.gammingbazaar.com/api/recent-orders', {
+        const res = await fetch('https://backend.freefiretopupbd.com/api/recent-orders', {
             cache: 'no-store'
         });
 
