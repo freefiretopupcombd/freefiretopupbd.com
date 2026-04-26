@@ -9,11 +9,8 @@ import NoticeBanner from '@/components/home/NoticeBanner';
 
 export const metadata: Metadata = {
   title: 'Free Fire Top Up BD - Instant Diamond Top Up Bangladesh',
-  description: 'Buy Free Fire diamonds instantly in Bangladesh with secure and fast delivery, secure payment, and best prices for FF top up BD.',
+  description: 'Buy Free Fire diamonds instantly in Bangladesh with secure and fast delivery.',
   keywords: ['free fire diamond top up', 'diamond bd', 'ff top up bangladesh'],
-  alternates: {
-    canonical: 'https://freefiretopupbd.com',
-  },
   openGraph: {
     title: 'Free Fire Top Up BD',
     description: 'Instant Free Fire diamond top up in Bangladesh',
@@ -63,30 +60,18 @@ async function fetchProducts(page: number) {
 
 // 🔥 IMPORTANT: no-store (live data)
 async function fetchRecentOrders() {
-  try {
-    const url = `${process.env.NEXT_PUBLIC_API_URL}/api/recent-orders`;
+    try {
+        const res = await fetch('https://backend.freefiretopupbd.com/api/recent-orders', {
+            cache: 'no-store'
+        });
 
-    const res = await fetch(url, {
-      cache: 'no-store'
-    });
+        const json = await res.json();
 
-    const text = await res.text();
-
-    console.log("RAW RESPONSE:", text);
-
-    // check if HTML came
-    if (text.startsWith("<!DOCTYPE")) {
-      console.error("❌ HTML returned instead of JSON");
-      return [];
+        // API direct array return করে
+        return Array.isArray(json) ? json : (json.data || []);
+    } catch {
+        return [];
     }
-
-    const json = JSON.parse(text);
-
-    return Array.isArray(json) ? json : (json.data || []);
-  } catch (err) {
-    console.error("FETCH ERROR:", err);
-    return [];
-  }
 }
 
 export default async function HomePage({ searchParams }: { searchParams: { page?: string } }) {
