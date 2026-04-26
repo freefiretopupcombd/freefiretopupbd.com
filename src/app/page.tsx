@@ -63,25 +63,27 @@ async function fetchProducts(page: number) {
 
 // 🔥 IMPORTANT: no-store (live data)
 async function fetchRecentOrders() {
-    try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  try {
+    const url = 'https://backend.freefiretopupbd.com/api/recent-orders';
 
-        const res = await fetch(`${apiUrl}/api/recent-orders`, {
-            cache: 'no-store'
-        });
+    const res = await fetch(url, {
+      cache: 'no-store'
+    });
 
-        const json = await res.json();
+    console.log("STATUS:", res.status);
+    console.log("OK:", res.ok);
 
-        console.log("RECENT ORDERS:", json);
+    const data = await res.json();
 
-        if (Array.isArray(json)) return json;
-        if (Array.isArray(json.data)) return json.data;
+    console.log("DATA TYPE:", typeof data);
+    console.log("IS ARRAY:", Array.isArray(data));
+    console.log("DATA:", data);
 
-        return [];
-    } catch (err) {
-        console.error("fetch error:", err);
-        return [];
-    }
+    return Array.isArray(data) ? data : (data.data || []);
+  } catch (err) {
+    console.error("FETCH ERROR:", err);
+    return [];
+  }
 }
 
 export default async function HomePage({ searchParams }: { searchParams: { page?: string } }) {
