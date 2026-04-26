@@ -64,15 +64,22 @@ async function fetchProducts(page: number) {
 // 🔥 IMPORTANT: no-store (live data)
 async function fetchRecentOrders() {
     try {
-        const res = await fetch('https://backend.freefiretopupbd.com/api/recent-orders', {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
+        const res = await fetch(`${apiUrl}/api/recent-orders`, {
             cache: 'no-store'
         });
 
         const json = await res.json();
 
-        // API direct array return করে
-        return Array.isArray(json) ? json : (json.data || []);
-    } catch {
+        console.log("RECENT ORDERS:", json);
+
+        if (Array.isArray(json)) return json;
+        if (Array.isArray(json.data)) return json.data;
+
+        return [];
+    } catch (err) {
+        console.error("fetch error:", err);
         return [];
     }
 }
