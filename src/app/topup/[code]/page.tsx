@@ -39,6 +39,9 @@ async function fetchProductDetails(code: string) {
   return {
     title: product.meta_title || product.name,
     description: product.meta_description || product.description,
+    alternates: {
+    canonical: `https://freefiretopupbd.com/topup/${code}`,
+    },
     openGraph: {
       title: product.meta_title || product.name,
       description: product.meta_description || product.description,
