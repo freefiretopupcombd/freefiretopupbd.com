@@ -11,6 +11,9 @@ export const metadata: Metadata = {
   title: 'Free Fire Top Up BD - Instant Diamond Top Up Bangladesh',
   description: 'Buy Free Fire diamonds instantly in Bangladesh with secure and fast delivery.',
   keywords: ['free fire diamond top up', 'diamond bd', 'ff top up bangladesh'],
+  alternates: {
+    canonical: "https://freefiretopupbd.com",
+  },
   openGraph: {
     title: 'Free Fire Top Up BD',
     description: 'Instant Free Fire diamond top up in Bangladesh',

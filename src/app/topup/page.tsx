@@ -7,6 +7,9 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
     title: 'Top Up Games & Gift Cards',
     description: 'Buy mobile game top-ups and gift cards instantly at Free Fire Top Up BD.',
+    alternates: {
+        canonical: "https://freefiretopupbd.com/topup",
+    },
 };
 
 async function fetchProducts(page: number) {
