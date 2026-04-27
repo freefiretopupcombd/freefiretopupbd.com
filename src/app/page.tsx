@@ -38,7 +38,6 @@ async function fetchSiteSettings() {
         return null;
     }
 }
-
 async function fetchProducts(page: number) {
     try {
         const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://backend.freefiretopupbd.com';
