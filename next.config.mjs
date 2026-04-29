@@ -18,28 +18,28 @@ const nextConfig = {
       },
     ];
   },
-  async redirects() {
-    return [
-      {
-        // Existing redirect
-        source: '/product/:slug',
-        destination: '/topup/:slug',
-        permanent: true,
-      },
-      {
-        // www to non-www redirect for all paths
-        source: '/:path*',
-        has: [
-          {
-            type: 'host',
-            value: 'www.freefiretopupbd.com',
-          },
-        ],
-        destination: 'https://freefiretopupbd.com/:path*',
-        permanent: true,
-      },
-    ];
-  },
+  // async redirects() {
+  //   return [
+  //     {
+  //       // Existing redirect
+  //       source: '/product/:slug',
+  //       destination: '/topup/:slug',
+  //       permanent: true,
+  //     },
+  //     {
+  //       // www to non-www redirect for all paths
+  //       source: '/:path*',
+  //       has: [
+  //         {
+  //           type: 'host',
+  //           value: 'www.freefiretopupbd.com',
+  //         },
+  //       ],
+  //       destination: 'https://freefiretopupbd.com/:path*',
+  //       permanent: true,
+  //     },
+  //   ];
+  // },
 };
 
 export default nextConfig;

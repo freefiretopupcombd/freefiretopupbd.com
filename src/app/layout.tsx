@@ -17,7 +17,7 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://www.freefiretopupbd.com'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://freefiretopupbd.com'),
   title: {
     template: '%s',
     default: 'Free Fire Top Up BD - Premium Game Top Up & Gift Cards',
@@ -68,7 +68,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "WebSite",
               name: "FreeFire TopUp BD",
-              url: "https://www.freefiretopupbd.com/"
+              url: "https://freefiretopupbd.com/"
             })
           }}
         />

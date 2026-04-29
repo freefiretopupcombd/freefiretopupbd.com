@@ -19,7 +19,7 @@ async function fetchProducts() {
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL || 'https://www.freefiretopupbd.com'
+    process.env.NEXT_PUBLIC_SITE_URL || 'https://freefiretopupbd.com'
 
   const products = await fetchProducts()
   console.log("PRODUCTS IN SITEMAP:", products) // debug
@@ -71,7 +71,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
 // export default function sitemap(): MetadataRoute.Sitemap {
 //   const baseUrl =
-//     process.env.NEXT_PUBLIC_SITE_URL || 'https://www.freefiretopupbd.com'
+//     process.env.NEXT_PUBLIC_SITE_URL || 'https://freefiretopupbd.com'
 
 //   return [
 //     // 🏠 Main pages
