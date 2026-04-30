@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next'
 
-export const revalidate = 3600 // 1 hour cache
+export const revalidate = 0 // 1 hour cache
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || ''
 const BASE_URL =
@@ -12,7 +12,7 @@ const BASE_URL =
 async function fetchProducts() {
   try {
     const res = await fetch(`${API_URL}/api/all-products`, {
-      next: { revalidate: 3600 },
+      cache: 'no-store',
     })
 
     if (!res.ok) return []
@@ -29,7 +29,7 @@ async function fetchProducts() {
 async function fetchBlogs() {
   try {
     const res = await fetch(`${API_URL}/api/blogs`, {
-      next: { revalidate: 3600 },
+    cache: 'no-store',
     })
 
     if (!res.ok) return []
