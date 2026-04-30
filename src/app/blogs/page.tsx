@@ -5,7 +5,7 @@ export const metadata = {
 
 async function getBlogs() {
   const apiUrl =
-    process.env.NEXT_PUBLIC_API_URL || "http://backend.freefiretopupbd.com";
+    process.env.NEXT_PUBLIC_API_URL || "https://backend.freefiretopupbd.com";
 
   const res = await fetch(`${apiUrl}/api/blogs`, {
     cache: "no-store",

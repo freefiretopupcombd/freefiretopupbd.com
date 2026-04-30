@@ -8,7 +8,7 @@ export async function generateMetadata({ params }: {
   const { slug } = await params;
 
   const apiUrl =
-    process.env.NEXT_PUBLIC_API_URL || "http://backend.freefiretopupbd.com";
+    process.env.NEXT_PUBLIC_API_URL || "https://backend.freefiretopupbd.com";
 
   const res = await fetch(`${apiUrl}/api/blogs`, {
     cache: "no-store",
@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: {
 async function getBlog(slug: string) {
     try {
         const apiUrl =
-            process.env.NEXT_PUBLIC_API_URL || "http://backend.freefiretopupbd.com";
+            process.env.NEXT_PUBLIC_API_URL || "https://backend.freefiretopupbd.com";
 
         const res = await fetch(`${apiUrl}/api/blogs/${slug}`, {
             cache: "no-store",
@@ -56,7 +56,7 @@ async function getBlog(slug: string) {
 // 👇 এখানেই নতুন function
 async function getBlogs() {
   const apiUrl =
-    process.env.NEXT_PUBLIC_API_URL || "http://backend.freefiretopupbd.com";
+    process.env.NEXT_PUBLIC_API_URL || "https://backend.freefiretopupbd.com";
 
   const res = await fetch(`${apiUrl}/api/blogs`, {
     cache: "no-store",
@@ -85,7 +85,7 @@ export default async function BlogDetailsPage({ params }: {
     );
 
     // ✅ এখানে বসবে
-    const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://backend.freefiretopupbd.com";
+    const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://backend.freefiretopupbd.com";
 
     const coverImage = blog?.cover_banner
         ? `${API_URL}/storage/blogs/${blog.cover_banner}`

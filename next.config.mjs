@@ -10,11 +10,11 @@ const nextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: 'http://backend.freefiretopupbd.com/api/:path*',
+        destination: 'https://backend.freefiretopupbd.com/api/:path*',
       },
       {
         source: '/storage/:path*',
-        destination: 'http://backend.freefiretopupbd.com/storage/:path*',
+        destination: 'https://backend.freefiretopupbd.com/storage/:path*',
       },
     ];
   },

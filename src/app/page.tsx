@@ -64,7 +64,7 @@ async function fetchProducts(page: number) {
 // 🔥 IMPORTANT: no-store (live data)
 async function fetchRecentOrders() {
     try {
-        const res = await fetch('http://backend.freefiretopupbd.com/api/recent-orders', {
+        const res = await fetch('https://backend.freefiretopupbd.com/api/recent-orders', {
             cache: 'no-store'
         });
 
