@@ -1,16 +1,22 @@
-
 import { MetadataRoute } from 'next'
 
 export const revalidate = 3600 // 1 hour cache
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || ''
+const BASE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL || 'https://freefiretopupbd.com'
+
+/* ---------------------------
+   PRODUCTS FETCH
+----------------------------*/
 async function fetchProducts() {
   try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/all-products`,
-      { next: { revalidate: 3600 } }
-    )
+    const res = await fetch(`${API_URL}/api/all-products`, {
+      next: { revalidate: 3600 },
+    })
 
     if (!res.ok) return []
+
     return res.json()
   } catch {
     return []
@@ -22,37 +28,43 @@ async function fetchProducts() {
 ----------------------------*/
 async function fetchBlogs() {
   try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/blogs`,
-      { next: { revalidate: 3600 } }
-    )
+    const res = await fetch(`${API_URL}/api/blogs`, {
+      next: { revalidate: 3600 },
+    })
 
-    if (!res.ok) return { data: [] }
+    if (!res.ok) return []
 
     return res.json()
   } catch {
-    return { data: [] }
+    return []
   }
 }
 
-
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL || 'https://freefiretopupbd.com'
+  /* ---------------------------
+     PRODUCTS
+  ----------------------------*/
+  const productResponse = await fetchProducts()
 
-  const products = await fetchProducts()
-  console.log("PRODUCTS IN SITEMAP:", products) // debug
+  const products = Array.isArray(productResponse)
+    ? productResponse
+    : productResponse?.data || []
 
-    /* BLOGS */
+  /* ---------------------------
+     BLOGS
+  ----------------------------*/
   const blogResponse = await fetchBlogs()
-  const blogs = blogResponse ?? []
 
-  console.log("PRODUCTS:", products)
-  console.log("BLOGS:", blogs)
+  const blogs = Array.isArray(blogResponse)
+    ? blogResponse
+    : blogResponse?.data || []
 
+  /* ---------------------------
+     PRODUCT URLs
+  ----------------------------*/
   const productUrls: MetadataRoute.Sitemap = products.map(
     (product: any) => ({
-      url: `${baseUrl}/topup/${product.slug || product.code}`,
+      url: `${BASE_URL}/topup/${product.slug || product.code}`,
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 0.8,
@@ -64,41 +76,43 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ----------------------------*/
   const blogUrls: MetadataRoute.Sitemap = blogs.map(
     (blog: any) => ({
-      url: `${baseUrl}/blogs/${blog.slug}`,
+      url: `${BASE_URL}/blogs/${blog.slug}`,
       lastModified: new Date(blog.updated_at || blog.created_at),
       changeFrequency: 'weekly',
       priority: 0.7,
     })
   )
 
+  /* ---------------------------
+     STATIC PAGES
+  ----------------------------*/
   return [
     {
-      url: `${baseUrl}`,
+      url: BASE_URL,
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 1,
     },
     {
-      url: `${baseUrl}/topup`,
+      url: `${BASE_URL}/topup`,
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/faq`,
+      url: `${BASE_URL}/faq`,
       lastModified: new Date(),
-      changeFrequency: 'daily',
-      priority: 0.9,
+      changeFrequency: 'monthly',
+      priority: 0.8,
     },
     {
-      url: `${baseUrl}/contact`,
+      url: `${BASE_URL}/contact`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.7,
     },
-
     {
-      url: `${baseUrl}/blogs`,
+      url: `${BASE_URL}/blogs`,
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 0.9,
@@ -108,6 +122,3 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...blogUrls,
   ]
 }
-
-
-
