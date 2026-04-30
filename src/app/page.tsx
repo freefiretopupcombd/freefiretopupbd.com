@@ -6,6 +6,7 @@ import ProductGrid from '@/components/home/ProductGrid';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import Link from 'next/link';
 import NoticeBanner from '@/components/home/NoticeBanner';
+import BlogCard from "@/components/BlogCard";
 
 export const metadata: Metadata = {
   title: 'Free Fire Top Up BD - Instant Diamond Top Up Bangladesh',
@@ -63,7 +64,7 @@ async function fetchProducts(page: number) {
 // 🔥 IMPORTANT: no-store (live data)
 async function fetchRecentOrders() {
     try {
-        const res = await fetch('https://backend.freefiretopupbd.com/api/recent-orders', {
+        const res = await fetch('http://backend.freefiretopupbd.com/api/recent-orders', {
             cache: 'no-store'
         });
 
@@ -76,6 +77,41 @@ async function fetchRecentOrders() {
     }
 }
 
+// 🔥 ADD THIS FUNCTION (outside component)
+async function getBlogs() {
+    try {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://backend.freefiretopupbd.com';
+
+        const res = await fetch(`${apiUrl}/api/blogs`, {
+            cache: "no-store",
+            headers: {
+                'Accept': 'application/json',
+            }
+        });
+
+        if (!res.ok) {
+            console.log("Blog API Error:", res.status);
+            return [];
+        }
+
+        const data = await res.json();
+
+        // ✅ FIX: API may return array OR object
+        if (Array.isArray(data)) {
+            return data;
+        }
+
+        if (data?.data && Array.isArray(data.data)) {
+            return data.data;
+        }
+
+        return [];
+    } catch (error) {
+        console.log("Blog Fetch Error:", error);
+        return [];
+    }
+}
+
 export default async function HomePage({ searchParams }: { searchParams: { page?: string } }) {
     const params = await searchParams;
     const page = Number(params.page) || 1;
@@ -83,6 +119,7 @@ export default async function HomePage({ searchParams }: { searchParams: { page?
     const settings = await fetchSiteSettings();
     const products = await fetchProducts(page);
     const recentOrders = await fetchRecentOrders();
+    const blogs = await getBlogs();
 
     const mobileGames = products.filter((item: any) => {
         try {
@@ -192,6 +229,36 @@ export default async function HomePage({ searchParams }: { searchParams: { page?
     )}
 
 </div>
+
+{/* BLOG SECTION */}
+<div className="mt-20 bg-gradient-to-b from-[#05070d] to-black p-6 rounded-3xl border border-white/5">
+
+    <div className="flex justify-between items-center mb-10">
+        <h2 className="text-3xl font-extrabold text-white">
+            Latest Blogs
+        </h2>
+
+        <Link href="/blogs" className="text-gray-400 hover:text-white">
+            View All →
+        </Link>
+    </div>
+
+    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+
+        {Array.isArray(blogs) && blogs.length > 0 ? (
+            blogs.slice(0, 3).map((blog: any) => (
+                <BlogCard key={blog.id} blog={blog} />
+            ))
+        ) : (
+            <p className="text-gray-400 col-span-3 text-center">
+                🚀 No blogs available
+            </p>
+        )}
+
+    </div>
+
+</div>
+
 
 </div>
 

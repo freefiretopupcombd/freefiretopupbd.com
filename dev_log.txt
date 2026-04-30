@@ -3,7 +3,7 @@
 > next dev
 
   Γû▓ Next.js 14.2.35
-  - Local:        http://localhost:3000
+  - Local:        http://freefiretopupbd.com
   - Environments: .env.local
 
  Γ£ô Starting...
