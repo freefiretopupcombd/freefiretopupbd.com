@@ -228,8 +228,13 @@ useEffect(() => {
                     });
                     const data = await res.json();
                     if (data.status === "success") {
-                        setWallet({ ...wallet, balance: wallet.balance - totalAmount });
-                        router.push('/profile/order');
+                    setWallet({ ...wallet, balance: wallet.balance - totalAmount });
+
+                    console.log("Order ID:", data.order_id);
+                    console.log("TRX ID:", data.trx_id);
+
+                    router.push('/profile/order');
+
                     } else {
                         setError(data.message || "Wallet payment failed. Please add money.");
                     }

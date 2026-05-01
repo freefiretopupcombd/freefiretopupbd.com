@@ -88,7 +88,7 @@ export default function OrderPage() {
                                                 <div>
                                                     <p className="text-xs text-gray-400">Order ID</p>
                                                     <p className="font-bold text-white">
-                                                        #{order.order_id || order.id}
+                                                        #{order.id}
                                                     </p>
 
                                                     <p className="text-xs text-gray-400 mt-2">Transaction</p>
