@@ -138,8 +138,12 @@ export default function Footer() {
     {/* ================= PREMIUM FLOATING SUPPORT ================= */}
     <div
   id="support-button"
-  className="fixed right-4 z-50 flex flex-col items-end gap-3 transition-all duration-300 bottom-[calc(74px+var(--install-offset,0px))] md:bottom-5"
-  >
+  className="fixed right-4 z-50 flex flex-col items-end gap-3 transition-all duration-300"
+  style={{
+    bottom: 'calc(74px + var(--install-offset, 0px))'
+  }}
+
+>
   {/* Action Buttons */}
   {isSupportOpen && (
     <div className="flex flex-col gap-2 animate-in slide-in-from-bottom-2 duration-300">
