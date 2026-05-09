@@ -20,10 +20,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://freefiretopupbd.com'),
   title: {
     template: '%s',
-    default: 'Free Fire Top Up BD - Premium Game Top Up & Gift Cards',
+    default: 'Free Fire Diamond Top Up Bangladesh | Instant FF Diamond Recharge'
+  
   },
   manifest: '/manifest.json',
-  description: 'Premium game top-up app in Bangladesh, offering seamless and automatic Bkash, Nagad payments for Free Fire, PUBG, and more.',
+  description: 'Buy Free Fire Diamond Top Up in Bangladesh instantly with bKash, Nagad & Rocket. Secure FF Diamond recharge with fast automated delivery.',
   
   authors: [{ name: 'Free Fire Top Up BD' }],
   icons: {
@@ -35,8 +36,8 @@ export const metadata: Metadata = {
     title: 'Free Fire Top Up BD - Premium Game Top Up',
     description: 'Get your game credits instantly! Premium games top up app in Bangladesh with automated delivery.',
     url: '/',
-    siteName: 'Free Fire Top Up BD',
-    locale: 'en_US',
+    siteName: 'FreeFire TopUp BD',
+    locale: 'en_BD',
     type: 'website',
   },
   robots: {
@@ -62,15 +63,16 @@ export default function RootLayout({
       <head>
         {/* ✅ Structured Data for Google Site Name */}
         <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebSite",
-              name: "FreeFire TopUp BD",
-              url: "https://freefiretopupbd.com/"
-            })
-          }}
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "FreeFireTopUpBD",
+        "url": "https://freefiretopupbd.com",
+        "logo": "https://freefiretopupbd.com/favicon.ico"
+        })
+        }}
         />
       </head>
 
