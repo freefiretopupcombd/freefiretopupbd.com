@@ -194,7 +194,7 @@ export default async function HomePage({ searchParams }: { searchParams: { page?
                 </div>
 
                 {/* SEO Section */}
-        <section className="text-center mb-6 mt-10">
+        <section className="mx-auto mt-16 mb-6 bg-white/5 border border-white/10 rounded-2xl p-8 text-gray-300 leading-8">
           <h2 className="text-3xl font-bold mb-6 text-white">
             Buy Free Fire Diamond Top Up Bangladesh
           </h2>
