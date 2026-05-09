@@ -183,7 +183,7 @@ export default async function HomePage({ searchParams }: { searchParams: { page?
                 <ProductGrid products={giftCards} />
 
                 {/* Pagination*/}
-                {/* <div className="flex items-center justify-center gap-4 py-8">
+                <div className="flex items-center justify-center gap-4 py-8">
                     <Link href={`/?page=${page > 1 ? page - 1 : 1}`} className="flex items-center gap-2 px-6 py-2 bg-white border border-gray-300 rounded-lg shadow-sm hover:bg-gray-50 text-gray-700 font-bold transition-all">
                         <FaArrowLeft /> Previous
                     </Link>
@@ -191,10 +191,10 @@ export default async function HomePage({ searchParams }: { searchParams: { page?
                     <Link href={`/?page=${page + 1}`} className="flex items-center gap-2 px-6 py-2 bg-white border border-gray-300 rounded-lg shadow-sm hover:bg-gray-50 text-gray-700 font-bold transition-all">
                         Next <FaArrowRight />
                     </Link>
-                </div> */}
+                </div>
 
                 {/* SEO Section */}
-        <section className="max-w-5xl mx-auto mt-16 mb-16 bg-white/5 border border-white/10 rounded-2xl p-8 text-gray-300 leading-8">
+        <section className="text-center mb-6 mt-10">
           <h2 className="text-3xl font-bold mb-6 text-white">
             Buy Free Fire Diamond Top Up Bangladesh
           </h2>
