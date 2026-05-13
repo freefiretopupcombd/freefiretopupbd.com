@@ -10,15 +10,15 @@ import NoticeBanner from '@/components/home/NoticeBanner';
 import BlogCard from "@/components/BlogCard";
 
 export const metadata: Metadata = {
-  title: 'Free Fire Diamond Top Up Bangladesh | Instant FF Diamond Recharge via bKash',
-  description: 'Buy Free Fire Diamond Top Up in Bangladesh instantly with bKash, Nagad & Rocket. Secure FF Diamond Top Up, fast delivery, best prices and trusted Free Fire Top Up BD service.',
-  keywords: ['free fire diamond top up', 'diamond bd', 'ff top up bangladesh'],
+  title: 'Free Fire Diamonds Top Up | Instant FF Diamond Recharge via bKash',
+  description: 'Free Fire Diamonds Top Up in Bangladesh instantly with bKash, Nagad & Rocket. Secure FF Diamonds Top Up, fast delivery, best prices and trusted Free Fire Top Up BD service.',
+  keywords: ['free fire diamonds top up', 'diamonds top up bd', 'ff diamonds top up bangladesh'],
   alternates: {
     canonical: "https://freefiretopupbd.com",
   },
   openGraph: {
-    title: 'Free Fire Diamond Top Up Bangladesh',
-    description: 'Buy FF Diamond Top Up instantly in Bangladesh with bKash, Nagad and Rocket.',
+    title: 'Free Fire Diamonds Top Up BD',
+    description: 'FF Diamonds Top Up instantly in Bangladesh with bKash, Nagad and Rocket.',
     url: 'https://freefiretopupbd.com',
     siteName: 'Free Fire Top Up BD',
     type: 'website',
@@ -146,10 +146,10 @@ export default async function HomePage({ searchParams }: { searchParams: { page?
         __html: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "WebPage",
-          "name": "Free Fire Diamond Top Up Bangladesh",
+          "name": "Free Fire Diamonds Top Up Bangladesh",
           "url": "https://freefiretopupbd.com",
           "description":
-            "Buy Free Fire Diamond Top Up in Bangladesh instantly with bKash, Nagad and Rocket."
+            "Free Fire Diamonds Top Up in Bangladesh instantly with bKash, Nagad and Rocket."
         })
       }}
     />
@@ -196,29 +196,29 @@ export default async function HomePage({ searchParams }: { searchParams: { page?
                 {/* SEO Section */}
         <section className="mx-auto mt-16 mb-6 bg-white/5 border border-white/10 rounded-2xl p-8 text-gray-300 leading-8">
           <h2 className="text-3xl font-bold mb-6 text-white">
-            Buy Free Fire Diamond Top Up Bangladesh
+            Free Fire Diamonds Top Up Bangladesh
           </h2>
 
           <p className="mb-5">
-            FreeFireTopUpBD is Bangladesh’s trusted platform for Free Fire Diamond Top Up.
-            Buy FF Diamond instantly using bKash, Nagad and Rocket with secure automated delivery.
+            Free Fire Top Up BD is Bangladesh’s trusted platform for Free Fire Diamonds Top Up.
+            Buy FF Diamonds instantly using bKash, Nagad and Rocket with secure automated delivery.
             We provide affordable Free Fire Top Up BD services for all Bangladeshi gamers.
           </p>
 
           <p className="mb-5">
-            Looking for secure FF Diamond Top Up in Bangladesh? Our platform offers
+            Looking for secure FF Diamonds Top Up in Bangladesh? Our platform offers
             instant processing, competitive pricing, fast delivery and reliable support
             for every Free Fire top up purchase.
           </p>
 
           <h3 className="text-2xl font-semibold mt-8 mb-4 text-white">
-            Why Choose Our FF Diamond Top Up Service?
+            Why Choose Our FF Diamonds Top Up Service?
           </h3>
 
           <ul className="list-disc ml-6 space-y-2">
-            <li>Instant Free Fire Diamond delivery</li>
+            <li>Instant Free Fire Diamonds delivery</li>
             <li>Secure bKash, Nagad & Rocket payments</li>
-            <li>Best FF Diamond prices in Bangladesh</li>
+            <li>Best FF Diamonds prices in Bangladesh</li>
             <li>24/7 customer support</li>
             <li>Trusted by Bangladeshi gamers</li>
           </ul>
